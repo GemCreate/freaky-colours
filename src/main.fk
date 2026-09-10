@@ -1,0 +1,181 @@
+-- Freak colours package
+
+pilot mut foregroundColor: word = "\x1b[39m"
+pilot mut backgroundColor: word = "\x1b[49m"
+
+
+task sayC(text: word) -> void {
+
+say foregroundColor + backgroundColor + text + "\x1b[0m"
+
+}
+
+
+
+task resetColors() -> void {
+
+	foregroundColor = "\x1b[39m"
+	backgroundColor = "\x1b[49m"
+
+}
+
+task setFG_red() -> void {
+
+	foregroundColor = "\x1b[1;31m"
+
+}
+task setFG_black() -> void {
+
+	foregroundColor = "\x1b[1;30m"
+
+}
+task setFG_green() -> void {
+
+	foregroundColor = "\x1b[1;32m"
+
+}
+task setFG_yellow() -> void {
+
+	foregroundColor = "\x1b[1;33m"
+
+}
+task setFG_blue() -> void {
+
+	foregroundColor = "\x1b[1;34m"
+
+}
+task setFG_magenta() -> void {
+
+	foregroundColor = "\x1b[1;35m"
+
+}
+task setFG_cyan() -> void {
+
+	foregroundColor = "\x1b[1;36m"
+
+}
+task setFG_white() -> void {
+
+	foregroundColor = "\x1b[1;37m"
+
+}
+task setFG_b_black() -> void {
+
+	foregroundColor = "\x1b[1;90m"
+
+}
+task setFG_b_red() -> void {
+
+	foregroundColor = "\x1b[1;91m"
+
+}
+task setFG_p_green() -> void {
+
+	foregroundColor = "\x1b[1;92m"
+
+}
+task setFG_b_yellow() -> void {
+
+	foregroundColor = "\x1b[1;93m"
+
+}
+task setFG_b_blue() -> void {
+
+	foregroundColor = "\x1b[1;94m"
+
+}
+task setFG_b_magenta() -> void {
+
+	foregroundColor = "\x1b[1;95m"
+
+}
+task setFG_b_cyan() -> void {
+
+	foregroundColor = "\x1b[1;96m"
+
+}
+task setFG_b_white() -> void {
+
+	foregroundColor = "\x1b[1;37m"
+
+}
+task setBG_red() -> void {
+
+	backgroundColor = "\x1b[1;41m"
+
+}
+task setBG_black() -> void {
+
+	backgroundColor = "\x1b[1;40m"
+
+}
+task setBG_green() -> void {
+
+	backgroundColor = "\x1b[1;42m"
+
+}
+task setBG_yellow() -> void {
+
+	backgroundColor = "\x1b[1;43m"
+
+}
+task setBG_blue() -> void {
+
+	backgroundColor = "\x1b[1;44m"
+
+}
+task setBG_magenta() -> void {
+
+	backgroundColor = "\x1b[1;45m"
+
+}
+task setBG_cyan() -> void {
+
+	backgroundColor = "\x1b[1;46m"
+
+}
+task setBG_white() -> void {
+
+	backgroundColor = "\x1b[1;47m"
+
+}
+task setBG_b_black() -> void {
+
+	backgroundColor = "\x1b[1;100m"
+
+}
+task setBG_b_red() -> void {
+
+	backgroundColor = "\x1b[1;101m"
+
+}
+task setBG_b_green() -> void {
+
+	backgroundColor = "\x1b[1;102m"
+
+}
+task setBG_b_yellow() -> void {
+
+	backgroundColor = "\x1b[1;103m"
+
+}
+task setBG_b_blue() -> void {
+
+	backgroundColor = "\x1b[1;104m"
+
+}
+task setBG_b_magenta() -> void {
+
+	backgroundColor = "\x1b[1;105m"
+
+}
+task setBG_b_cyan() -> void {
+
+	backgroundColor = "\x1b[1;106m"
+
+}
+task setBG_b_white() -> void {
+
+	backgroundColor = "\x1b[1;107m"
+
+}
