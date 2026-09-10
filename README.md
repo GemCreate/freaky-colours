@@ -15,6 +15,10 @@ Using the Hangar CLI tool:
 
 `hangar add freaky-colours https://github.com/GemCreate/freaky-colours`
 
+### Careful
+
+An installed package is not visible to the compiler. freak build never reads hangar_modules/ and never reads [dependencies]. A use pkg::{…} line is rewritten to a comment before parsing, so nothing is imported and the first call into the package fails with unknown callable. Hangar today is a manifest and download tool. The link step that would make a dependency usable does not exist in V3.
+
 ---
 
 ## Usage Example:
