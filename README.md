@@ -8,6 +8,17 @@ You don't need ANSI
 
 ---
 
+## How to import?
+
+
+Using the Hangar CLI tool:
+
+`hangar add freaky-colours https://github.com/GemCreate/freaky-colours`
+
+{This will import the package, however you may not be able to include it in your project yet}
+
+---
+
 ## Usage Example:
 ```rust
 -- FREAK CODE
