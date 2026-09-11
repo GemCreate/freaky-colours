@@ -1,11 +1,11 @@
 -- Freak colours package
 
-// Global colour variables
+-- Global colour variables
 pilot mut foregroundColor: word = "\x1b[39m"
 pilot mut backgroundColor: word = "\x1b[49m"
 
 
-// Console i/o functions
+-- Console i/o functions
 task sayC(text: word) -> void {
 
 	say foregroundColor + backgroundColor + text + "\x1b[0m"
@@ -18,7 +18,7 @@ task askC(text: word) -> word {
 }
 
 
-// Resets the global colour variables
+-- Resets the global colour variables
 task resetColors() -> void {
 
 	foregroundColor = "\x1b[39m"
@@ -26,7 +26,7 @@ task resetColors() -> void {
 
 }
 
-// Foreground selection functions
+-- Foreground selection functions
 task setFG_red() -> void {
 
 	foregroundColor = "\x1b[1;31m"
@@ -68,7 +68,7 @@ task setFG_white() -> void {
 
 }
 
-// Bright foreground selection functions
+-- Bright foreground selection functions
 task setFG_b_black() -> void {
 
 	foregroundColor = "\x1b[1;90m"
@@ -110,7 +110,7 @@ task setFG_b_white() -> void {
 
 }
 
-// Background selection functions
+-- Background selection functions
 task setBG_red() -> void {
 
 	backgroundColor = "\x1b[1;41m"
@@ -152,7 +152,7 @@ task setBG_white() -> void {
 
 }
 
-// Bright background selection functions
+-- Bright background selection functions
 task setBG_b_black() -> void {
 
 	backgroundColor = "\x1b[1;100m"
