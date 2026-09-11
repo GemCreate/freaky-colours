@@ -30,4 +30,11 @@ setBG_red()
 sayC("THE BACKGROUND HAS TURNED RED")
 resetColors()
 sayC("Aww everything is back to normal")
+
+setFG_magenta()
+setBG_b_green() -- b before the colour indicates brightness
+pilot age = askC("How old are you? ")
+setFG_b_yellow()
+sayC("You are " + age + " years old.")
+
 ```

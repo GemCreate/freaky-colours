@@ -123,6 +123,7 @@ declare void @freak_llvm_tcp_close(i64)
 @g_http_inited = global i64 0
 @g_foregroundColor = global i64 0
 @g_backgroundColor = global i64 0
+@g_something = global i64 0
 
 declare i64 @freak_fopen(i64, i64)
 declare i64 @freak_fclose(i64)
@@ -10888,384 +10889,424 @@ entry:
     ret void, !dbg !9102
 }
 
-define void @__freak_user_resetColors() !dbg !9103 {
+define i64 @__freak_user_askC(i64 %arg_text) !dbg !9103 {
 entry:
-    %t6499 = getelementptr inbounds [6 x i8], [6 x i8]* @.str.335, i64 0, i64 0, !dbg !9104
-    %t6500 = ptrtoint i8* %t6499 to i64, !dbg !9105
-    %t6501 = load i64, i64* @g_foregroundColor, !dbg !9106
-    call void @freak_llvm_word_release_replaced(i64 %t6501, i64 %t6500), !dbg !9107
-    store i64 %t6500, i64* @g_foregroundColor, !dbg !9108
-    %t6502 = getelementptr inbounds [6 x i8], [6 x i8]* @.str.336, i64 0, i64 0, !dbg !9109
-    %t6503 = ptrtoint i8* %t6502 to i64, !dbg !9110
-    %t6504 = load i64, i64* @g_backgroundColor, !dbg !9111
-    call void @freak_llvm_word_release_replaced(i64 %t6504, i64 %t6503), !dbg !9112
-    store i64 %t6503, i64* @g_backgroundColor, !dbg !9113
-    ret void, !dbg !9114
+    %text = alloca i64, !dbg !9104
+    store i64 %arg_text, i64* %text, !dbg !9105
+    %t6499 = load i64, i64* @g_foregroundColor, !dbg !9106
+    %t6500 = load i64, i64* @g_backgroundColor, !dbg !9107
+    %t6501 = call i64 @freak_llvm_word_concat(i64 %t6499, i64 %t6500), !dbg !9108
+    %t6502 = load i64, i64* %text, !dbg !9109
+    %t6503 = call i64 @freak_llvm_word_concat(i64 %t6501, i64 %t6502), !dbg !9110
+    call void @freak_llvm_word_release_replaced(i64 %t6501, i64 %t6503), !dbg !9111
+    %t6504 = getelementptr inbounds [5 x i8], [5 x i8]* @.str.335, i64 0, i64 0, !dbg !9112
+    %t6505 = ptrtoint i8* %t6504 to i64, !dbg !9113
+    %t6506 = call i64 @freak_llvm_word_concat(i64 %t6503, i64 %t6505), !dbg !9114
+    call void @freak_llvm_word_release_replaced(i64 %t6503, i64 %t6506), !dbg !9115
+    call void @freak_llvm_word_release_replaced(i64 %t6505, i64 %t6506), !dbg !9116
+    %t6507 = call i64 @freak_llvm_ask(i64 %t6506), !dbg !9117
+    call void @freak_llvm_word_release_replaced(i64 %t6506, i64 %t6507), !dbg !9118
+    %t6508 = load i64, i64* %text, !dbg !9119
+    call void @freak_llvm_word_release_replaced(i64 %t6508, i64 0), !dbg !9120
+    store i64 0, i64* %text, !dbg !9121
+    ret i64 %t6507, !dbg !9122
+return.dead.6509:
+    %t6510 = load i64, i64* %text, !dbg !9123
+    call void @freak_llvm_word_release_replaced(i64 %t6510, i64 0), !dbg !9124
+    store i64 0, i64* %text, !dbg !9125
+    ret i64 0, !dbg !9126
 }
 
-define void @__freak_user_setFG_red() !dbg !9115 {
+define void @__freak_user_resetColors() !dbg !9127 {
 entry:
-    %t6505 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.337, i64 0, i64 0, !dbg !9116
-    %t6506 = ptrtoint i8* %t6505 to i64, !dbg !9117
-    %t6507 = load i64, i64* @g_foregroundColor, !dbg !9118
-    call void @freak_llvm_word_release_replaced(i64 %t6507, i64 %t6506), !dbg !9119
-    store i64 %t6506, i64* @g_foregroundColor, !dbg !9120
-    ret void, !dbg !9121
+    %t6511 = getelementptr inbounds [6 x i8], [6 x i8]* @.str.336, i64 0, i64 0, !dbg !9128
+    %t6512 = ptrtoint i8* %t6511 to i64, !dbg !9129
+    %t6513 = load i64, i64* @g_foregroundColor, !dbg !9130
+    call void @freak_llvm_word_release_replaced(i64 %t6513, i64 %t6512), !dbg !9131
+    store i64 %t6512, i64* @g_foregroundColor, !dbg !9132
+    %t6514 = getelementptr inbounds [6 x i8], [6 x i8]* @.str.337, i64 0, i64 0, !dbg !9133
+    %t6515 = ptrtoint i8* %t6514 to i64, !dbg !9134
+    %t6516 = load i64, i64* @g_backgroundColor, !dbg !9135
+    call void @freak_llvm_word_release_replaced(i64 %t6516, i64 %t6515), !dbg !9136
+    store i64 %t6515, i64* @g_backgroundColor, !dbg !9137
+    ret void, !dbg !9138
 }
 
-define void @__freak_user_setFG_black() !dbg !9122 {
+define void @__freak_user_setFG_red() !dbg !9139 {
 entry:
-    %t6508 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.338, i64 0, i64 0, !dbg !9123
-    %t6509 = ptrtoint i8* %t6508 to i64, !dbg !9124
-    %t6510 = load i64, i64* @g_foregroundColor, !dbg !9125
-    call void @freak_llvm_word_release_replaced(i64 %t6510, i64 %t6509), !dbg !9126
-    store i64 %t6509, i64* @g_foregroundColor, !dbg !9127
-    ret void, !dbg !9128
+    %t6517 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.338, i64 0, i64 0, !dbg !9140
+    %t6518 = ptrtoint i8* %t6517 to i64, !dbg !9141
+    %t6519 = load i64, i64* @g_foregroundColor, !dbg !9142
+    call void @freak_llvm_word_release_replaced(i64 %t6519, i64 %t6518), !dbg !9143
+    store i64 %t6518, i64* @g_foregroundColor, !dbg !9144
+    ret void, !dbg !9145
 }
 
-define void @__freak_user_setFG_green() !dbg !9129 {
+define void @__freak_user_setFG_black() !dbg !9146 {
 entry:
-    %t6511 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.339, i64 0, i64 0, !dbg !9130
-    %t6512 = ptrtoint i8* %t6511 to i64, !dbg !9131
-    %t6513 = load i64, i64* @g_foregroundColor, !dbg !9132
-    call void @freak_llvm_word_release_replaced(i64 %t6513, i64 %t6512), !dbg !9133
-    store i64 %t6512, i64* @g_foregroundColor, !dbg !9134
-    ret void, !dbg !9135
+    %t6520 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.339, i64 0, i64 0, !dbg !9147
+    %t6521 = ptrtoint i8* %t6520 to i64, !dbg !9148
+    %t6522 = load i64, i64* @g_foregroundColor, !dbg !9149
+    call void @freak_llvm_word_release_replaced(i64 %t6522, i64 %t6521), !dbg !9150
+    store i64 %t6521, i64* @g_foregroundColor, !dbg !9151
+    ret void, !dbg !9152
 }
 
-define void @__freak_user_setFG_yellow() !dbg !9136 {
+define void @__freak_user_setFG_green() !dbg !9153 {
 entry:
-    %t6514 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.340, i64 0, i64 0, !dbg !9137
-    %t6515 = ptrtoint i8* %t6514 to i64, !dbg !9138
-    %t6516 = load i64, i64* @g_foregroundColor, !dbg !9139
-    call void @freak_llvm_word_release_replaced(i64 %t6516, i64 %t6515), !dbg !9140
-    store i64 %t6515, i64* @g_foregroundColor, !dbg !9141
-    ret void, !dbg !9142
+    %t6523 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.340, i64 0, i64 0, !dbg !9154
+    %t6524 = ptrtoint i8* %t6523 to i64, !dbg !9155
+    %t6525 = load i64, i64* @g_foregroundColor, !dbg !9156
+    call void @freak_llvm_word_release_replaced(i64 %t6525, i64 %t6524), !dbg !9157
+    store i64 %t6524, i64* @g_foregroundColor, !dbg !9158
+    ret void, !dbg !9159
 }
 
-define void @__freak_user_setFG_blue() !dbg !9143 {
+define void @__freak_user_setFG_yellow() !dbg !9160 {
 entry:
-    %t6517 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.341, i64 0, i64 0, !dbg !9144
-    %t6518 = ptrtoint i8* %t6517 to i64, !dbg !9145
-    %t6519 = load i64, i64* @g_foregroundColor, !dbg !9146
-    call void @freak_llvm_word_release_replaced(i64 %t6519, i64 %t6518), !dbg !9147
-    store i64 %t6518, i64* @g_foregroundColor, !dbg !9148
-    ret void, !dbg !9149
+    %t6526 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.341, i64 0, i64 0, !dbg !9161
+    %t6527 = ptrtoint i8* %t6526 to i64, !dbg !9162
+    %t6528 = load i64, i64* @g_foregroundColor, !dbg !9163
+    call void @freak_llvm_word_release_replaced(i64 %t6528, i64 %t6527), !dbg !9164
+    store i64 %t6527, i64* @g_foregroundColor, !dbg !9165
+    ret void, !dbg !9166
 }
 
-define void @__freak_user_setFG_magenta() !dbg !9150 {
+define void @__freak_user_setFG_blue() !dbg !9167 {
 entry:
-    %t6520 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.342, i64 0, i64 0, !dbg !9151
-    %t6521 = ptrtoint i8* %t6520 to i64, !dbg !9152
-    %t6522 = load i64, i64* @g_foregroundColor, !dbg !9153
-    call void @freak_llvm_word_release_replaced(i64 %t6522, i64 %t6521), !dbg !9154
-    store i64 %t6521, i64* @g_foregroundColor, !dbg !9155
-    ret void, !dbg !9156
+    %t6529 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.342, i64 0, i64 0, !dbg !9168
+    %t6530 = ptrtoint i8* %t6529 to i64, !dbg !9169
+    %t6531 = load i64, i64* @g_foregroundColor, !dbg !9170
+    call void @freak_llvm_word_release_replaced(i64 %t6531, i64 %t6530), !dbg !9171
+    store i64 %t6530, i64* @g_foregroundColor, !dbg !9172
+    ret void, !dbg !9173
 }
 
-define void @__freak_user_setFG_cyan() !dbg !9157 {
+define void @__freak_user_setFG_magenta() !dbg !9174 {
 entry:
-    %t6523 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.343, i64 0, i64 0, !dbg !9158
-    %t6524 = ptrtoint i8* %t6523 to i64, !dbg !9159
-    %t6525 = load i64, i64* @g_foregroundColor, !dbg !9160
-    call void @freak_llvm_word_release_replaced(i64 %t6525, i64 %t6524), !dbg !9161
-    store i64 %t6524, i64* @g_foregroundColor, !dbg !9162
-    ret void, !dbg !9163
+    %t6532 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.343, i64 0, i64 0, !dbg !9175
+    %t6533 = ptrtoint i8* %t6532 to i64, !dbg !9176
+    %t6534 = load i64, i64* @g_foregroundColor, !dbg !9177
+    call void @freak_llvm_word_release_replaced(i64 %t6534, i64 %t6533), !dbg !9178
+    store i64 %t6533, i64* @g_foregroundColor, !dbg !9179
+    ret void, !dbg !9180
 }
 
-define void @__freak_user_setFG_white() !dbg !9164 {
+define void @__freak_user_setFG_cyan() !dbg !9181 {
 entry:
-    %t6526 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.344, i64 0, i64 0, !dbg !9165
-    %t6527 = ptrtoint i8* %t6526 to i64, !dbg !9166
-    %t6528 = load i64, i64* @g_foregroundColor, !dbg !9167
-    call void @freak_llvm_word_release_replaced(i64 %t6528, i64 %t6527), !dbg !9168
-    store i64 %t6527, i64* @g_foregroundColor, !dbg !9169
-    ret void, !dbg !9170
+    %t6535 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.344, i64 0, i64 0, !dbg !9182
+    %t6536 = ptrtoint i8* %t6535 to i64, !dbg !9183
+    %t6537 = load i64, i64* @g_foregroundColor, !dbg !9184
+    call void @freak_llvm_word_release_replaced(i64 %t6537, i64 %t6536), !dbg !9185
+    store i64 %t6536, i64* @g_foregroundColor, !dbg !9186
+    ret void, !dbg !9187
 }
 
-define void @__freak_user_setFG_b_black() !dbg !9171 {
+define void @__freak_user_setFG_white() !dbg !9188 {
 entry:
-    %t6529 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.345, i64 0, i64 0, !dbg !9172
-    %t6530 = ptrtoint i8* %t6529 to i64, !dbg !9173
-    %t6531 = load i64, i64* @g_foregroundColor, !dbg !9174
-    call void @freak_llvm_word_release_replaced(i64 %t6531, i64 %t6530), !dbg !9175
-    store i64 %t6530, i64* @g_foregroundColor, !dbg !9176
-    ret void, !dbg !9177
+    %t6538 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.345, i64 0, i64 0, !dbg !9189
+    %t6539 = ptrtoint i8* %t6538 to i64, !dbg !9190
+    %t6540 = load i64, i64* @g_foregroundColor, !dbg !9191
+    call void @freak_llvm_word_release_replaced(i64 %t6540, i64 %t6539), !dbg !9192
+    store i64 %t6539, i64* @g_foregroundColor, !dbg !9193
+    ret void, !dbg !9194
 }
 
-define void @__freak_user_setFG_b_red() !dbg !9178 {
+define void @__freak_user_setFG_b_black() !dbg !9195 {
 entry:
-    %t6532 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.346, i64 0, i64 0, !dbg !9179
-    %t6533 = ptrtoint i8* %t6532 to i64, !dbg !9180
-    %t6534 = load i64, i64* @g_foregroundColor, !dbg !9181
-    call void @freak_llvm_word_release_replaced(i64 %t6534, i64 %t6533), !dbg !9182
-    store i64 %t6533, i64* @g_foregroundColor, !dbg !9183
-    ret void, !dbg !9184
+    %t6541 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.346, i64 0, i64 0, !dbg !9196
+    %t6542 = ptrtoint i8* %t6541 to i64, !dbg !9197
+    %t6543 = load i64, i64* @g_foregroundColor, !dbg !9198
+    call void @freak_llvm_word_release_replaced(i64 %t6543, i64 %t6542), !dbg !9199
+    store i64 %t6542, i64* @g_foregroundColor, !dbg !9200
+    ret void, !dbg !9201
 }
 
-define void @__freak_user_setFG_p_green() !dbg !9185 {
+define void @__freak_user_setFG_b_red() !dbg !9202 {
 entry:
-    %t6535 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.347, i64 0, i64 0, !dbg !9186
-    %t6536 = ptrtoint i8* %t6535 to i64, !dbg !9187
-    %t6537 = load i64, i64* @g_foregroundColor, !dbg !9188
-    call void @freak_llvm_word_release_replaced(i64 %t6537, i64 %t6536), !dbg !9189
-    store i64 %t6536, i64* @g_foregroundColor, !dbg !9190
-    ret void, !dbg !9191
+    %t6544 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.347, i64 0, i64 0, !dbg !9203
+    %t6545 = ptrtoint i8* %t6544 to i64, !dbg !9204
+    %t6546 = load i64, i64* @g_foregroundColor, !dbg !9205
+    call void @freak_llvm_word_release_replaced(i64 %t6546, i64 %t6545), !dbg !9206
+    store i64 %t6545, i64* @g_foregroundColor, !dbg !9207
+    ret void, !dbg !9208
 }
 
-define void @__freak_user_setFG_b_yellow() !dbg !9192 {
+define void @__freak_user_setFG_p_green() !dbg !9209 {
 entry:
-    %t6538 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.348, i64 0, i64 0, !dbg !9193
-    %t6539 = ptrtoint i8* %t6538 to i64, !dbg !9194
-    %t6540 = load i64, i64* @g_foregroundColor, !dbg !9195
-    call void @freak_llvm_word_release_replaced(i64 %t6540, i64 %t6539), !dbg !9196
-    store i64 %t6539, i64* @g_foregroundColor, !dbg !9197
-    ret void, !dbg !9198
+    %t6547 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.348, i64 0, i64 0, !dbg !9210
+    %t6548 = ptrtoint i8* %t6547 to i64, !dbg !9211
+    %t6549 = load i64, i64* @g_foregroundColor, !dbg !9212
+    call void @freak_llvm_word_release_replaced(i64 %t6549, i64 %t6548), !dbg !9213
+    store i64 %t6548, i64* @g_foregroundColor, !dbg !9214
+    ret void, !dbg !9215
 }
 
-define void @__freak_user_setFG_b_blue() !dbg !9199 {
+define void @__freak_user_setFG_b_yellow() !dbg !9216 {
 entry:
-    %t6541 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.349, i64 0, i64 0, !dbg !9200
-    %t6542 = ptrtoint i8* %t6541 to i64, !dbg !9201
-    %t6543 = load i64, i64* @g_foregroundColor, !dbg !9202
-    call void @freak_llvm_word_release_replaced(i64 %t6543, i64 %t6542), !dbg !9203
-    store i64 %t6542, i64* @g_foregroundColor, !dbg !9204
-    ret void, !dbg !9205
+    %t6550 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.349, i64 0, i64 0, !dbg !9217
+    %t6551 = ptrtoint i8* %t6550 to i64, !dbg !9218
+    %t6552 = load i64, i64* @g_foregroundColor, !dbg !9219
+    call void @freak_llvm_word_release_replaced(i64 %t6552, i64 %t6551), !dbg !9220
+    store i64 %t6551, i64* @g_foregroundColor, !dbg !9221
+    ret void, !dbg !9222
 }
 
-define void @__freak_user_setFG_b_magenta() !dbg !9206 {
+define void @__freak_user_setFG_b_blue() !dbg !9223 {
 entry:
-    %t6544 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.350, i64 0, i64 0, !dbg !9207
-    %t6545 = ptrtoint i8* %t6544 to i64, !dbg !9208
-    %t6546 = load i64, i64* @g_foregroundColor, !dbg !9209
-    call void @freak_llvm_word_release_replaced(i64 %t6546, i64 %t6545), !dbg !9210
-    store i64 %t6545, i64* @g_foregroundColor, !dbg !9211
-    ret void, !dbg !9212
+    %t6553 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.350, i64 0, i64 0, !dbg !9224
+    %t6554 = ptrtoint i8* %t6553 to i64, !dbg !9225
+    %t6555 = load i64, i64* @g_foregroundColor, !dbg !9226
+    call void @freak_llvm_word_release_replaced(i64 %t6555, i64 %t6554), !dbg !9227
+    store i64 %t6554, i64* @g_foregroundColor, !dbg !9228
+    ret void, !dbg !9229
 }
 
-define void @__freak_user_setFG_b_cyan() !dbg !9213 {
+define void @__freak_user_setFG_b_magenta() !dbg !9230 {
 entry:
-    %t6547 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.351, i64 0, i64 0, !dbg !9214
-    %t6548 = ptrtoint i8* %t6547 to i64, !dbg !9215
-    %t6549 = load i64, i64* @g_foregroundColor, !dbg !9216
-    call void @freak_llvm_word_release_replaced(i64 %t6549, i64 %t6548), !dbg !9217
-    store i64 %t6548, i64* @g_foregroundColor, !dbg !9218
-    ret void, !dbg !9219
+    %t6556 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.351, i64 0, i64 0, !dbg !9231
+    %t6557 = ptrtoint i8* %t6556 to i64, !dbg !9232
+    %t6558 = load i64, i64* @g_foregroundColor, !dbg !9233
+    call void @freak_llvm_word_release_replaced(i64 %t6558, i64 %t6557), !dbg !9234
+    store i64 %t6557, i64* @g_foregroundColor, !dbg !9235
+    ret void, !dbg !9236
 }
 
-define void @__freak_user_setFG_b_white() !dbg !9220 {
+define void @__freak_user_setFG_b_cyan() !dbg !9237 {
 entry:
-    %t6550 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.352, i64 0, i64 0, !dbg !9221
-    %t6551 = ptrtoint i8* %t6550 to i64, !dbg !9222
-    %t6552 = load i64, i64* @g_foregroundColor, !dbg !9223
-    call void @freak_llvm_word_release_replaced(i64 %t6552, i64 %t6551), !dbg !9224
-    store i64 %t6551, i64* @g_foregroundColor, !dbg !9225
-    ret void, !dbg !9226
+    %t6559 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.352, i64 0, i64 0, !dbg !9238
+    %t6560 = ptrtoint i8* %t6559 to i64, !dbg !9239
+    %t6561 = load i64, i64* @g_foregroundColor, !dbg !9240
+    call void @freak_llvm_word_release_replaced(i64 %t6561, i64 %t6560), !dbg !9241
+    store i64 %t6560, i64* @g_foregroundColor, !dbg !9242
+    ret void, !dbg !9243
 }
 
-define void @__freak_user_setBG_red() !dbg !9227 {
+define void @__freak_user_setFG_b_white() !dbg !9244 {
 entry:
-    %t6553 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.353, i64 0, i64 0, !dbg !9228
-    %t6554 = ptrtoint i8* %t6553 to i64, !dbg !9229
-    %t6555 = load i64, i64* @g_backgroundColor, !dbg !9230
-    call void @freak_llvm_word_release_replaced(i64 %t6555, i64 %t6554), !dbg !9231
-    store i64 %t6554, i64* @g_backgroundColor, !dbg !9232
-    ret void, !dbg !9233
+    %t6562 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.353, i64 0, i64 0, !dbg !9245
+    %t6563 = ptrtoint i8* %t6562 to i64, !dbg !9246
+    %t6564 = load i64, i64* @g_foregroundColor, !dbg !9247
+    call void @freak_llvm_word_release_replaced(i64 %t6564, i64 %t6563), !dbg !9248
+    store i64 %t6563, i64* @g_foregroundColor, !dbg !9249
+    ret void, !dbg !9250
 }
 
-define void @__freak_user_setBG_black() !dbg !9234 {
+define void @__freak_user_setBG_red() !dbg !9251 {
 entry:
-    %t6556 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.354, i64 0, i64 0, !dbg !9235
-    %t6557 = ptrtoint i8* %t6556 to i64, !dbg !9236
-    %t6558 = load i64, i64* @g_backgroundColor, !dbg !9237
-    call void @freak_llvm_word_release_replaced(i64 %t6558, i64 %t6557), !dbg !9238
-    store i64 %t6557, i64* @g_backgroundColor, !dbg !9239
-    ret void, !dbg !9240
+    %t6565 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.354, i64 0, i64 0, !dbg !9252
+    %t6566 = ptrtoint i8* %t6565 to i64, !dbg !9253
+    %t6567 = load i64, i64* @g_backgroundColor, !dbg !9254
+    call void @freak_llvm_word_release_replaced(i64 %t6567, i64 %t6566), !dbg !9255
+    store i64 %t6566, i64* @g_backgroundColor, !dbg !9256
+    ret void, !dbg !9257
 }
 
-define void @__freak_user_setBG_green() !dbg !9241 {
+define void @__freak_user_setBG_black() !dbg !9258 {
 entry:
-    %t6559 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.355, i64 0, i64 0, !dbg !9242
-    %t6560 = ptrtoint i8* %t6559 to i64, !dbg !9243
-    %t6561 = load i64, i64* @g_backgroundColor, !dbg !9244
-    call void @freak_llvm_word_release_replaced(i64 %t6561, i64 %t6560), !dbg !9245
-    store i64 %t6560, i64* @g_backgroundColor, !dbg !9246
-    ret void, !dbg !9247
+    %t6568 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.355, i64 0, i64 0, !dbg !9259
+    %t6569 = ptrtoint i8* %t6568 to i64, !dbg !9260
+    %t6570 = load i64, i64* @g_backgroundColor, !dbg !9261
+    call void @freak_llvm_word_release_replaced(i64 %t6570, i64 %t6569), !dbg !9262
+    store i64 %t6569, i64* @g_backgroundColor, !dbg !9263
+    ret void, !dbg !9264
 }
 
-define void @__freak_user_setBG_yellow() !dbg !9248 {
+define void @__freak_user_setBG_green() !dbg !9265 {
 entry:
-    %t6562 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.356, i64 0, i64 0, !dbg !9249
-    %t6563 = ptrtoint i8* %t6562 to i64, !dbg !9250
-    %t6564 = load i64, i64* @g_backgroundColor, !dbg !9251
-    call void @freak_llvm_word_release_replaced(i64 %t6564, i64 %t6563), !dbg !9252
-    store i64 %t6563, i64* @g_backgroundColor, !dbg !9253
-    ret void, !dbg !9254
+    %t6571 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.356, i64 0, i64 0, !dbg !9266
+    %t6572 = ptrtoint i8* %t6571 to i64, !dbg !9267
+    %t6573 = load i64, i64* @g_backgroundColor, !dbg !9268
+    call void @freak_llvm_word_release_replaced(i64 %t6573, i64 %t6572), !dbg !9269
+    store i64 %t6572, i64* @g_backgroundColor, !dbg !9270
+    ret void, !dbg !9271
 }
 
-define void @__freak_user_setBG_blue() !dbg !9255 {
+define void @__freak_user_setBG_yellow() !dbg !9272 {
 entry:
-    %t6565 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.357, i64 0, i64 0, !dbg !9256
-    %t6566 = ptrtoint i8* %t6565 to i64, !dbg !9257
-    %t6567 = load i64, i64* @g_backgroundColor, !dbg !9258
-    call void @freak_llvm_word_release_replaced(i64 %t6567, i64 %t6566), !dbg !9259
-    store i64 %t6566, i64* @g_backgroundColor, !dbg !9260
-    ret void, !dbg !9261
+    %t6574 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.357, i64 0, i64 0, !dbg !9273
+    %t6575 = ptrtoint i8* %t6574 to i64, !dbg !9274
+    %t6576 = load i64, i64* @g_backgroundColor, !dbg !9275
+    call void @freak_llvm_word_release_replaced(i64 %t6576, i64 %t6575), !dbg !9276
+    store i64 %t6575, i64* @g_backgroundColor, !dbg !9277
+    ret void, !dbg !9278
 }
 
-define void @__freak_user_setBG_magenta() !dbg !9262 {
+define void @__freak_user_setBG_blue() !dbg !9279 {
 entry:
-    %t6568 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.358, i64 0, i64 0, !dbg !9263
-    %t6569 = ptrtoint i8* %t6568 to i64, !dbg !9264
-    %t6570 = load i64, i64* @g_backgroundColor, !dbg !9265
-    call void @freak_llvm_word_release_replaced(i64 %t6570, i64 %t6569), !dbg !9266
-    store i64 %t6569, i64* @g_backgroundColor, !dbg !9267
-    ret void, !dbg !9268
+    %t6577 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.358, i64 0, i64 0, !dbg !9280
+    %t6578 = ptrtoint i8* %t6577 to i64, !dbg !9281
+    %t6579 = load i64, i64* @g_backgroundColor, !dbg !9282
+    call void @freak_llvm_word_release_replaced(i64 %t6579, i64 %t6578), !dbg !9283
+    store i64 %t6578, i64* @g_backgroundColor, !dbg !9284
+    ret void, !dbg !9285
 }
 
-define void @__freak_user_setBG_cyan() !dbg !9269 {
+define void @__freak_user_setBG_magenta() !dbg !9286 {
 entry:
-    %t6571 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.359, i64 0, i64 0, !dbg !9270
-    %t6572 = ptrtoint i8* %t6571 to i64, !dbg !9271
-    %t6573 = load i64, i64* @g_backgroundColor, !dbg !9272
-    call void @freak_llvm_word_release_replaced(i64 %t6573, i64 %t6572), !dbg !9273
-    store i64 %t6572, i64* @g_backgroundColor, !dbg !9274
-    ret void, !dbg !9275
+    %t6580 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.359, i64 0, i64 0, !dbg !9287
+    %t6581 = ptrtoint i8* %t6580 to i64, !dbg !9288
+    %t6582 = load i64, i64* @g_backgroundColor, !dbg !9289
+    call void @freak_llvm_word_release_replaced(i64 %t6582, i64 %t6581), !dbg !9290
+    store i64 %t6581, i64* @g_backgroundColor, !dbg !9291
+    ret void, !dbg !9292
 }
 
-define void @__freak_user_setBG_white() !dbg !9276 {
+define void @__freak_user_setBG_cyan() !dbg !9293 {
 entry:
-    %t6574 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.360, i64 0, i64 0, !dbg !9277
-    %t6575 = ptrtoint i8* %t6574 to i64, !dbg !9278
-    %t6576 = load i64, i64* @g_backgroundColor, !dbg !9279
-    call void @freak_llvm_word_release_replaced(i64 %t6576, i64 %t6575), !dbg !9280
-    store i64 %t6575, i64* @g_backgroundColor, !dbg !9281
-    ret void, !dbg !9282
+    %t6583 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.360, i64 0, i64 0, !dbg !9294
+    %t6584 = ptrtoint i8* %t6583 to i64, !dbg !9295
+    %t6585 = load i64, i64* @g_backgroundColor, !dbg !9296
+    call void @freak_llvm_word_release_replaced(i64 %t6585, i64 %t6584), !dbg !9297
+    store i64 %t6584, i64* @g_backgroundColor, !dbg !9298
+    ret void, !dbg !9299
 }
 
-define void @__freak_user_setBG_b_black() !dbg !9283 {
+define void @__freak_user_setBG_white() !dbg !9300 {
 entry:
-    %t6577 = getelementptr inbounds [9 x i8], [9 x i8]* @.str.361, i64 0, i64 0, !dbg !9284
-    %t6578 = ptrtoint i8* %t6577 to i64, !dbg !9285
-    %t6579 = load i64, i64* @g_backgroundColor, !dbg !9286
-    call void @freak_llvm_word_release_replaced(i64 %t6579, i64 %t6578), !dbg !9287
-    store i64 %t6578, i64* @g_backgroundColor, !dbg !9288
-    ret void, !dbg !9289
+    %t6586 = getelementptr inbounds [8 x i8], [8 x i8]* @.str.361, i64 0, i64 0, !dbg !9301
+    %t6587 = ptrtoint i8* %t6586 to i64, !dbg !9302
+    %t6588 = load i64, i64* @g_backgroundColor, !dbg !9303
+    call void @freak_llvm_word_release_replaced(i64 %t6588, i64 %t6587), !dbg !9304
+    store i64 %t6587, i64* @g_backgroundColor, !dbg !9305
+    ret void, !dbg !9306
 }
 
-define void @__freak_user_setBG_b_red() !dbg !9290 {
+define void @__freak_user_setBG_b_black() !dbg !9307 {
 entry:
-    %t6580 = getelementptr inbounds [9 x i8], [9 x i8]* @.str.362, i64 0, i64 0, !dbg !9291
-    %t6581 = ptrtoint i8* %t6580 to i64, !dbg !9292
-    %t6582 = load i64, i64* @g_backgroundColor, !dbg !9293
-    call void @freak_llvm_word_release_replaced(i64 %t6582, i64 %t6581), !dbg !9294
-    store i64 %t6581, i64* @g_backgroundColor, !dbg !9295
-    ret void, !dbg !9296
+    %t6589 = getelementptr inbounds [9 x i8], [9 x i8]* @.str.362, i64 0, i64 0, !dbg !9308
+    %t6590 = ptrtoint i8* %t6589 to i64, !dbg !9309
+    %t6591 = load i64, i64* @g_backgroundColor, !dbg !9310
+    call void @freak_llvm_word_release_replaced(i64 %t6591, i64 %t6590), !dbg !9311
+    store i64 %t6590, i64* @g_backgroundColor, !dbg !9312
+    ret void, !dbg !9313
 }
 
-define void @__freak_user_setBG_b_green() !dbg !9297 {
+define void @__freak_user_setBG_b_red() !dbg !9314 {
 entry:
-    %t6583 = getelementptr inbounds [9 x i8], [9 x i8]* @.str.363, i64 0, i64 0, !dbg !9298
-    %t6584 = ptrtoint i8* %t6583 to i64, !dbg !9299
-    %t6585 = load i64, i64* @g_backgroundColor, !dbg !9300
-    call void @freak_llvm_word_release_replaced(i64 %t6585, i64 %t6584), !dbg !9301
-    store i64 %t6584, i64* @g_backgroundColor, !dbg !9302
-    ret void, !dbg !9303
+    %t6592 = getelementptr inbounds [9 x i8], [9 x i8]* @.str.363, i64 0, i64 0, !dbg !9315
+    %t6593 = ptrtoint i8* %t6592 to i64, !dbg !9316
+    %t6594 = load i64, i64* @g_backgroundColor, !dbg !9317
+    call void @freak_llvm_word_release_replaced(i64 %t6594, i64 %t6593), !dbg !9318
+    store i64 %t6593, i64* @g_backgroundColor, !dbg !9319
+    ret void, !dbg !9320
 }
 
-define void @__freak_user_setBG_b_yellow() !dbg !9304 {
+define void @__freak_user_setBG_b_green() !dbg !9321 {
 entry:
-    %t6586 = getelementptr inbounds [9 x i8], [9 x i8]* @.str.364, i64 0, i64 0, !dbg !9305
-    %t6587 = ptrtoint i8* %t6586 to i64, !dbg !9306
-    %t6588 = load i64, i64* @g_backgroundColor, !dbg !9307
-    call void @freak_llvm_word_release_replaced(i64 %t6588, i64 %t6587), !dbg !9308
-    store i64 %t6587, i64* @g_backgroundColor, !dbg !9309
-    ret void, !dbg !9310
+    %t6595 = getelementptr inbounds [9 x i8], [9 x i8]* @.str.364, i64 0, i64 0, !dbg !9322
+    %t6596 = ptrtoint i8* %t6595 to i64, !dbg !9323
+    %t6597 = load i64, i64* @g_backgroundColor, !dbg !9324
+    call void @freak_llvm_word_release_replaced(i64 %t6597, i64 %t6596), !dbg !9325
+    store i64 %t6596, i64* @g_backgroundColor, !dbg !9326
+    ret void, !dbg !9327
 }
 
-define void @__freak_user_setBG_b_blue() !dbg !9311 {
+define void @__freak_user_setBG_b_yellow() !dbg !9328 {
 entry:
-    %t6589 = getelementptr inbounds [9 x i8], [9 x i8]* @.str.365, i64 0, i64 0, !dbg !9312
-    %t6590 = ptrtoint i8* %t6589 to i64, !dbg !9313
-    %t6591 = load i64, i64* @g_backgroundColor, !dbg !9314
-    call void @freak_llvm_word_release_replaced(i64 %t6591, i64 %t6590), !dbg !9315
-    store i64 %t6590, i64* @g_backgroundColor, !dbg !9316
-    ret void, !dbg !9317
+    %t6598 = getelementptr inbounds [9 x i8], [9 x i8]* @.str.365, i64 0, i64 0, !dbg !9329
+    %t6599 = ptrtoint i8* %t6598 to i64, !dbg !9330
+    %t6600 = load i64, i64* @g_backgroundColor, !dbg !9331
+    call void @freak_llvm_word_release_replaced(i64 %t6600, i64 %t6599), !dbg !9332
+    store i64 %t6599, i64* @g_backgroundColor, !dbg !9333
+    ret void, !dbg !9334
 }
 
-define void @__freak_user_setBG_b_magenta() !dbg !9318 {
+define void @__freak_user_setBG_b_blue() !dbg !9335 {
 entry:
-    %t6592 = getelementptr inbounds [9 x i8], [9 x i8]* @.str.366, i64 0, i64 0, !dbg !9319
-    %t6593 = ptrtoint i8* %t6592 to i64, !dbg !9320
-    %t6594 = load i64, i64* @g_backgroundColor, !dbg !9321
-    call void @freak_llvm_word_release_replaced(i64 %t6594, i64 %t6593), !dbg !9322
-    store i64 %t6593, i64* @g_backgroundColor, !dbg !9323
-    ret void, !dbg !9324
+    %t6601 = getelementptr inbounds [9 x i8], [9 x i8]* @.str.366, i64 0, i64 0, !dbg !9336
+    %t6602 = ptrtoint i8* %t6601 to i64, !dbg !9337
+    %t6603 = load i64, i64* @g_backgroundColor, !dbg !9338
+    call void @freak_llvm_word_release_replaced(i64 %t6603, i64 %t6602), !dbg !9339
+    store i64 %t6602, i64* @g_backgroundColor, !dbg !9340
+    ret void, !dbg !9341
 }
 
-define void @__freak_user_setBG_b_cyan() !dbg !9325 {
+define void @__freak_user_setBG_b_magenta() !dbg !9342 {
 entry:
-    %t6595 = getelementptr inbounds [9 x i8], [9 x i8]* @.str.367, i64 0, i64 0, !dbg !9326
-    %t6596 = ptrtoint i8* %t6595 to i64, !dbg !9327
-    %t6597 = load i64, i64* @g_backgroundColor, !dbg !9328
-    call void @freak_llvm_word_release_replaced(i64 %t6597, i64 %t6596), !dbg !9329
-    store i64 %t6596, i64* @g_backgroundColor, !dbg !9330
-    ret void, !dbg !9331
+    %t6604 = getelementptr inbounds [9 x i8], [9 x i8]* @.str.367, i64 0, i64 0, !dbg !9343
+    %t6605 = ptrtoint i8* %t6604 to i64, !dbg !9344
+    %t6606 = load i64, i64* @g_backgroundColor, !dbg !9345
+    call void @freak_llvm_word_release_replaced(i64 %t6606, i64 %t6605), !dbg !9346
+    store i64 %t6605, i64* @g_backgroundColor, !dbg !9347
+    ret void, !dbg !9348
 }
 
-define void @__freak_user_setBG_b_white() !dbg !9332 {
+define void @__freak_user_setBG_b_cyan() !dbg !9349 {
 entry:
-    %t6598 = getelementptr inbounds [9 x i8], [9 x i8]* @.str.368, i64 0, i64 0, !dbg !9333
-    %t6599 = ptrtoint i8* %t6598 to i64, !dbg !9334
-    %t6600 = load i64, i64* @g_backgroundColor, !dbg !9335
-    call void @freak_llvm_word_release_replaced(i64 %t6600, i64 %t6599), !dbg !9336
-    store i64 %t6599, i64* @g_backgroundColor, !dbg !9337
-    ret void, !dbg !9338
+    %t6607 = getelementptr inbounds [9 x i8], [9 x i8]* @.str.368, i64 0, i64 0, !dbg !9350
+    %t6608 = ptrtoint i8* %t6607 to i64, !dbg !9351
+    %t6609 = load i64, i64* @g_backgroundColor, !dbg !9352
+    call void @freak_llvm_word_release_replaced(i64 %t6609, i64 %t6608), !dbg !9353
+    store i64 %t6608, i64* @g_backgroundColor, !dbg !9354
+    ret void, !dbg !9355
 }
 
-define void @__freak_generated_top_level() !dbg !9339 {
+define void @__freak_user_setBG_b_white() !dbg !9356 {
 entry:
-    store i64 0, i64* @g_json_types, !dbg !9340
-    store i64 0, i64* @g_json_vals, !dbg !9341
-    store i64 0, i64* @g_json_children, !dbg !9342
-    store i64 0, i64* @g_json_keys, !dbg !9343
-    store i64 0, i64* @g_json_count, !dbg !9344
-    store i64 0, i64* @g_json_inited, !dbg !9345
-    %t6601 = getelementptr inbounds [1 x i8], [1 x i8]* @.str.369, i64 0, i64 0, !dbg !9346
-    %t6602 = ptrtoint i8* %t6601 to i64, !dbg !9347
-    store i64 %t6602, i64* @g_json_src, !dbg !9348
-    store i64 0, i64* @g_json_pos, !dbg !9349
-    store i64 0, i64* @g_json_len, !dbg !9350
-    store i64 0, i64* @g_http_resp_statuses, !dbg !9351
-    store i64 0, i64* @g_http_resp_bodies, !dbg !9352
-    store i64 0, i64* @g_http_resp_headers_raw, !dbg !9353
-    store i64 0, i64* @g_http_resp_count, !dbg !9354
-    store i64 0, i64* @g_http_inited, !dbg !9355
-    %t6603 = getelementptr inbounds [6 x i8], [6 x i8]* @.str.370, i64 0, i64 0, !dbg !9356
-    %t6604 = ptrtoint i8* %t6603 to i64, !dbg !9357
-    store i64 %t6604, i64* @g_foregroundColor, !dbg !9358
-    %t6605 = getelementptr inbounds [6 x i8], [6 x i8]* @.str.371, i64 0, i64 0, !dbg !9359
-    %t6606 = ptrtoint i8* %t6605 to i64, !dbg !9360
-    store i64 %t6606, i64* @g_backgroundColor, !dbg !9361
+    %t6610 = getelementptr inbounds [9 x i8], [9 x i8]* @.str.369, i64 0, i64 0, !dbg !9357
+    %t6611 = ptrtoint i8* %t6610 to i64, !dbg !9358
+    %t6612 = load i64, i64* @g_backgroundColor, !dbg !9359
+    call void @freak_llvm_word_release_replaced(i64 %t6612, i64 %t6611), !dbg !9360
+    store i64 %t6611, i64* @g_backgroundColor, !dbg !9361
     ret void, !dbg !9362
 }
 
-define i32 @main(i32 %argc, i8** %argv) !dbg !9363 {
+define void @__freak_generated_top_level() !dbg !9363 {
 entry:
-    %argc_ext = sext i32 %argc to i64, !dbg !9364
-    %argv_ptr = ptrtoint i8** %argv to i64, !dbg !9365
-    call void @freak_llvm_setup_args(i64 %argc_ext, i64 %argv_ptr), !dbg !9366
-    call void @__freak_generated_top_level(), !dbg !9367
-    %t6607 = load i64, i64* @g_json_src, !dbg !9368
-    call void @freak_llvm_word_release_replaced(i64 %t6607, i64 0), !dbg !9369
-    store i64 0, i64* @g_json_src, !dbg !9370
-    %t6608 = load i64, i64* @g_foregroundColor, !dbg !9371
-    call void @freak_llvm_word_release_replaced(i64 %t6608, i64 0), !dbg !9372
-    store i64 0, i64* @g_foregroundColor, !dbg !9373
-    %t6609 = load i64, i64* @g_backgroundColor, !dbg !9374
-    call void @freak_llvm_word_release_replaced(i64 %t6609, i64 0), !dbg !9375
-    store i64 0, i64* @g_backgroundColor, !dbg !9376
-    ret i32 0, !dbg !9377
+    store i64 0, i64* @g_json_types, !dbg !9364
+    store i64 0, i64* @g_json_vals, !dbg !9365
+    store i64 0, i64* @g_json_children, !dbg !9366
+    store i64 0, i64* @g_json_keys, !dbg !9367
+    store i64 0, i64* @g_json_count, !dbg !9368
+    store i64 0, i64* @g_json_inited, !dbg !9369
+    %t6613 = getelementptr inbounds [1 x i8], [1 x i8]* @.str.370, i64 0, i64 0, !dbg !9370
+    %t6614 = ptrtoint i8* %t6613 to i64, !dbg !9371
+    store i64 %t6614, i64* @g_json_src, !dbg !9372
+    store i64 0, i64* @g_json_pos, !dbg !9373
+    store i64 0, i64* @g_json_len, !dbg !9374
+    store i64 0, i64* @g_http_resp_statuses, !dbg !9375
+    store i64 0, i64* @g_http_resp_bodies, !dbg !9376
+    store i64 0, i64* @g_http_resp_headers_raw, !dbg !9377
+    store i64 0, i64* @g_http_resp_count, !dbg !9378
+    store i64 0, i64* @g_http_inited, !dbg !9379
+    %t6615 = getelementptr inbounds [6 x i8], [6 x i8]* @.str.371, i64 0, i64 0, !dbg !9380
+    %t6616 = ptrtoint i8* %t6615 to i64, !dbg !9381
+    store i64 %t6616, i64* @g_foregroundColor, !dbg !9382
+    %t6617 = getelementptr inbounds [6 x i8], [6 x i8]* @.str.372, i64 0, i64 0, !dbg !9383
+    %t6618 = ptrtoint i8* %t6617 to i64, !dbg !9384
+    store i64 %t6618, i64* @g_backgroundColor, !dbg !9385
+    call void @__freak_user_setFG_blue(), !dbg !9386
+    call void @__freak_user_setBG_green(), !dbg !9387
+    %t6619 = getelementptr inbounds [11 x i8], [11 x i8]* @.str.373, i64 0, i64 0, !dbg !9388
+    %t6620 = ptrtoint i8* %t6619 to i64, !dbg !9389
+    %t6621 = call i64 @__freak_user_askC(i64 %t6620), !dbg !9390
+    store i64 %t6621, i64* @g_something, !dbg !9391
+    %t6622 = load i64, i64* @g_something, !dbg !9392
+    %t6623 = call i64 @freak_llvm_word_clone(i64 %t6622), !dbg !9393
+    call void @__freak_user_sayC(i64 %t6623), !dbg !9394
+    ret void, !dbg !9395
+}
+
+define i32 @main(i32 %argc, i8** %argv) !dbg !9396 {
+entry:
+    %argc_ext = sext i32 %argc to i64, !dbg !9397
+    %argv_ptr = ptrtoint i8** %argv to i64, !dbg !9398
+    call void @freak_llvm_setup_args(i64 %argc_ext, i64 %argv_ptr), !dbg !9399
+    call void @__freak_generated_top_level(), !dbg !9400
+    %t6624 = load i64, i64* @g_json_src, !dbg !9401
+    call void @freak_llvm_word_release_replaced(i64 %t6624, i64 0), !dbg !9402
+    store i64 0, i64* @g_json_src, !dbg !9403
+    %t6625 = load i64, i64* @g_foregroundColor, !dbg !9404
+    call void @freak_llvm_word_release_replaced(i64 %t6625, i64 0), !dbg !9405
+    store i64 0, i64* @g_foregroundColor, !dbg !9406
+    %t6626 = load i64, i64* @g_backgroundColor, !dbg !9407
+    call void @freak_llvm_word_release_replaced(i64 %t6626, i64 0), !dbg !9408
+    store i64 0, i64* @g_backgroundColor, !dbg !9409
+    %t6627 = load i64, i64* @g_something, !dbg !9410
+    call void @freak_llvm_word_release_replaced(i64 %t6627, i64 0), !dbg !9411
+    store i64 0, i64* @g_something, !dbg !9412
+    ret i32 0, !dbg !9413
 }
 
 ; String Literals
@@ -11604,47 +11645,49 @@ entry:
 @.str.332 = private unnamed_addr constant [18 x i8] c" HTTP/1.1\0D\0AHost: \00", align 1
 @.str.333 = private unnamed_addr constant [47 x i8] c"\0D\0AConnection: close\0D\0AUser-Agent: FREAK/0.8\0D\0A\0D\0A\00", align 1
 @.str.334 = private unnamed_addr constant [5 x i8] c"\1b[0m\00", align 1
-@.str.335 = private unnamed_addr constant [6 x i8] c"\1b[39m\00", align 1
-@.str.336 = private unnamed_addr constant [6 x i8] c"\1b[49m\00", align 1
-@.str.337 = private unnamed_addr constant [8 x i8] c"\1b[1;31m\00", align 1
-@.str.338 = private unnamed_addr constant [8 x i8] c"\1b[1;30m\00", align 1
-@.str.339 = private unnamed_addr constant [8 x i8] c"\1b[1;32m\00", align 1
-@.str.340 = private unnamed_addr constant [8 x i8] c"\1b[1;33m\00", align 1
-@.str.341 = private unnamed_addr constant [8 x i8] c"\1b[1;34m\00", align 1
-@.str.342 = private unnamed_addr constant [8 x i8] c"\1b[1;35m\00", align 1
-@.str.343 = private unnamed_addr constant [8 x i8] c"\1b[1;36m\00", align 1
-@.str.344 = private unnamed_addr constant [8 x i8] c"\1b[1;37m\00", align 1
-@.str.345 = private unnamed_addr constant [8 x i8] c"\1b[1;90m\00", align 1
-@.str.346 = private unnamed_addr constant [8 x i8] c"\1b[1;91m\00", align 1
-@.str.347 = private unnamed_addr constant [8 x i8] c"\1b[1;92m\00", align 1
-@.str.348 = private unnamed_addr constant [8 x i8] c"\1b[1;93m\00", align 1
-@.str.349 = private unnamed_addr constant [8 x i8] c"\1b[1;94m\00", align 1
-@.str.350 = private unnamed_addr constant [8 x i8] c"\1b[1;95m\00", align 1
-@.str.351 = private unnamed_addr constant [8 x i8] c"\1b[1;96m\00", align 1
-@.str.352 = private unnamed_addr constant [8 x i8] c"\1b[1;37m\00", align 1
-@.str.353 = private unnamed_addr constant [8 x i8] c"\1b[1;41m\00", align 1
-@.str.354 = private unnamed_addr constant [8 x i8] c"\1b[1;40m\00", align 1
-@.str.355 = private unnamed_addr constant [8 x i8] c"\1b[1;42m\00", align 1
-@.str.356 = private unnamed_addr constant [8 x i8] c"\1b[1;43m\00", align 1
-@.str.357 = private unnamed_addr constant [8 x i8] c"\1b[1;44m\00", align 1
-@.str.358 = private unnamed_addr constant [8 x i8] c"\1b[1;45m\00", align 1
-@.str.359 = private unnamed_addr constant [8 x i8] c"\1b[1;46m\00", align 1
-@.str.360 = private unnamed_addr constant [8 x i8] c"\1b[1;47m\00", align 1
-@.str.361 = private unnamed_addr constant [9 x i8] c"\1b[1;100m\00", align 1
-@.str.362 = private unnamed_addr constant [9 x i8] c"\1b[1;101m\00", align 1
-@.str.363 = private unnamed_addr constant [9 x i8] c"\1b[1;102m\00", align 1
-@.str.364 = private unnamed_addr constant [9 x i8] c"\1b[1;103m\00", align 1
-@.str.365 = private unnamed_addr constant [9 x i8] c"\1b[1;104m\00", align 1
-@.str.366 = private unnamed_addr constant [9 x i8] c"\1b[1;105m\00", align 1
-@.str.367 = private unnamed_addr constant [9 x i8] c"\1b[1;106m\00", align 1
-@.str.368 = private unnamed_addr constant [9 x i8] c"\1b[1;107m\00", align 1
-@.str.369 = private unnamed_addr constant [1 x i8] c"\00", align 1
-@.str.370 = private unnamed_addr constant [6 x i8] c"\1b[39m\00", align 1
-@.str.371 = private unnamed_addr constant [6 x i8] c"\1b[49m\00", align 1
+@.str.335 = private unnamed_addr constant [5 x i8] c"\1b[0m\00", align 1
+@.str.336 = private unnamed_addr constant [6 x i8] c"\1b[39m\00", align 1
+@.str.337 = private unnamed_addr constant [6 x i8] c"\1b[49m\00", align 1
+@.str.338 = private unnamed_addr constant [8 x i8] c"\1b[1;31m\00", align 1
+@.str.339 = private unnamed_addr constant [8 x i8] c"\1b[1;30m\00", align 1
+@.str.340 = private unnamed_addr constant [8 x i8] c"\1b[1;32m\00", align 1
+@.str.341 = private unnamed_addr constant [8 x i8] c"\1b[1;33m\00", align 1
+@.str.342 = private unnamed_addr constant [8 x i8] c"\1b[1;34m\00", align 1
+@.str.343 = private unnamed_addr constant [8 x i8] c"\1b[1;35m\00", align 1
+@.str.344 = private unnamed_addr constant [8 x i8] c"\1b[1;36m\00", align 1
+@.str.345 = private unnamed_addr constant [8 x i8] c"\1b[1;37m\00", align 1
+@.str.346 = private unnamed_addr constant [8 x i8] c"\1b[1;90m\00", align 1
+@.str.347 = private unnamed_addr constant [8 x i8] c"\1b[1;91m\00", align 1
+@.str.348 = private unnamed_addr constant [8 x i8] c"\1b[1;92m\00", align 1
+@.str.349 = private unnamed_addr constant [8 x i8] c"\1b[1;93m\00", align 1
+@.str.350 = private unnamed_addr constant [8 x i8] c"\1b[1;94m\00", align 1
+@.str.351 = private unnamed_addr constant [8 x i8] c"\1b[1;95m\00", align 1
+@.str.352 = private unnamed_addr constant [8 x i8] c"\1b[1;96m\00", align 1
+@.str.353 = private unnamed_addr constant [8 x i8] c"\1b[1;37m\00", align 1
+@.str.354 = private unnamed_addr constant [8 x i8] c"\1b[1;41m\00", align 1
+@.str.355 = private unnamed_addr constant [8 x i8] c"\1b[1;40m\00", align 1
+@.str.356 = private unnamed_addr constant [8 x i8] c"\1b[1;42m\00", align 1
+@.str.357 = private unnamed_addr constant [8 x i8] c"\1b[1;43m\00", align 1
+@.str.358 = private unnamed_addr constant [8 x i8] c"\1b[1;44m\00", align 1
+@.str.359 = private unnamed_addr constant [8 x i8] c"\1b[1;45m\00", align 1
+@.str.360 = private unnamed_addr constant [8 x i8] c"\1b[1;46m\00", align 1
+@.str.361 = private unnamed_addr constant [8 x i8] c"\1b[1;47m\00", align 1
+@.str.362 = private unnamed_addr constant [9 x i8] c"\1b[1;100m\00", align 1
+@.str.363 = private unnamed_addr constant [9 x i8] c"\1b[1;101m\00", align 1
+@.str.364 = private unnamed_addr constant [9 x i8] c"\1b[1;102m\00", align 1
+@.str.365 = private unnamed_addr constant [9 x i8] c"\1b[1;103m\00", align 1
+@.str.366 = private unnamed_addr constant [9 x i8] c"\1b[1;104m\00", align 1
+@.str.367 = private unnamed_addr constant [9 x i8] c"\1b[1;105m\00", align 1
+@.str.368 = private unnamed_addr constant [9 x i8] c"\1b[1;106m\00", align 1
+@.str.369 = private unnamed_addr constant [9 x i8] c"\1b[1;107m\00", align 1
+@.str.370 = private unnamed_addr constant [1 x i8] c"\00", align 1
+@.str.371 = private unnamed_addr constant [6 x i8] c"\1b[39m\00", align 1
+@.str.372 = private unnamed_addr constant [6 x i8] c"\1b[49m\00", align 1
+@.str.373 = private unnamed_addr constant [11 x i8] c"Hi girlies\00", align 1
 
 !llvm.dbg.cu = !{!1}
-!llvm.module.flags = !{!9378, !9379}
-!0 = !DIFile(filename: "main.fk", directory: "src")
+!llvm.module.flags = !{!9414, !9415}
+!0 = !DIFile(filename: "main.fk", directory: ".")
 !1 = distinct !DICompileUnit(language: DW_LANG_C, file: !0, producer: "FREAK v3", isOptimized: false, runtimeVersion: 0, emissionKind: LineTablesOnly)
 !2 = !{}
 !3 = !DISubroutineType(types: !2)
@@ -20747,281 +20790,317 @@ entry:
 !9100 = !DILocation(line: 9, column: 1, scope: !9083)
 !9101 = !DILocation(line: 9, column: 1, scope: !9083)
 !9102 = !DILocation(line: 9, column: 1, scope: !9083)
-!9103 = distinct !DISubprogram(name: "resetColors", scope: !0, file: !0, line: 15, type: !3, scopeLine: 15, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
-!9104 = !DILocation(line: 17, column: 1, scope: !9103)
-!9105 = !DILocation(line: 17, column: 1, scope: !9103)
-!9106 = !DILocation(line: 17, column: 1, scope: !9103)
-!9107 = !DILocation(line: 17, column: 1, scope: !9103)
-!9108 = !DILocation(line: 17, column: 1, scope: !9103)
-!9109 = !DILocation(line: 18, column: 1, scope: !9103)
-!9110 = !DILocation(line: 18, column: 1, scope: !9103)
-!9111 = !DILocation(line: 18, column: 1, scope: !9103)
-!9112 = !DILocation(line: 18, column: 1, scope: !9103)
-!9113 = !DILocation(line: 18, column: 1, scope: !9103)
-!9114 = !DILocation(line: 18, column: 1, scope: !9103)
-!9115 = distinct !DISubprogram(name: "setFG_red", scope: !0, file: !0, line: 22, type: !3, scopeLine: 22, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
-!9116 = !DILocation(line: 24, column: 1, scope: !9115)
-!9117 = !DILocation(line: 24, column: 1, scope: !9115)
-!9118 = !DILocation(line: 24, column: 1, scope: !9115)
-!9119 = !DILocation(line: 24, column: 1, scope: !9115)
-!9120 = !DILocation(line: 24, column: 1, scope: !9115)
-!9121 = !DILocation(line: 24, column: 1, scope: !9115)
-!9122 = distinct !DISubprogram(name: "setFG_black", scope: !0, file: !0, line: 27, type: !3, scopeLine: 27, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
-!9123 = !DILocation(line: 29, column: 1, scope: !9122)
-!9124 = !DILocation(line: 29, column: 1, scope: !9122)
-!9125 = !DILocation(line: 29, column: 1, scope: !9122)
-!9126 = !DILocation(line: 29, column: 1, scope: !9122)
-!9127 = !DILocation(line: 29, column: 1, scope: !9122)
-!9128 = !DILocation(line: 29, column: 1, scope: !9122)
-!9129 = distinct !DISubprogram(name: "setFG_green", scope: !0, file: !0, line: 32, type: !3, scopeLine: 32, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
-!9130 = !DILocation(line: 34, column: 1, scope: !9129)
-!9131 = !DILocation(line: 34, column: 1, scope: !9129)
-!9132 = !DILocation(line: 34, column: 1, scope: !9129)
-!9133 = !DILocation(line: 34, column: 1, scope: !9129)
-!9134 = !DILocation(line: 34, column: 1, scope: !9129)
-!9135 = !DILocation(line: 34, column: 1, scope: !9129)
-!9136 = distinct !DISubprogram(name: "setFG_yellow", scope: !0, file: !0, line: 37, type: !3, scopeLine: 37, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
-!9137 = !DILocation(line: 39, column: 1, scope: !9136)
-!9138 = !DILocation(line: 39, column: 1, scope: !9136)
-!9139 = !DILocation(line: 39, column: 1, scope: !9136)
-!9140 = !DILocation(line: 39, column: 1, scope: !9136)
-!9141 = !DILocation(line: 39, column: 1, scope: !9136)
-!9142 = !DILocation(line: 39, column: 1, scope: !9136)
-!9143 = distinct !DISubprogram(name: "setFG_blue", scope: !0, file: !0, line: 42, type: !3, scopeLine: 42, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
-!9144 = !DILocation(line: 44, column: 1, scope: !9143)
-!9145 = !DILocation(line: 44, column: 1, scope: !9143)
-!9146 = !DILocation(line: 44, column: 1, scope: !9143)
-!9147 = !DILocation(line: 44, column: 1, scope: !9143)
-!9148 = !DILocation(line: 44, column: 1, scope: !9143)
-!9149 = !DILocation(line: 44, column: 1, scope: !9143)
-!9150 = distinct !DISubprogram(name: "setFG_magenta", scope: !0, file: !0, line: 47, type: !3, scopeLine: 47, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
-!9151 = !DILocation(line: 49, column: 1, scope: !9150)
-!9152 = !DILocation(line: 49, column: 1, scope: !9150)
-!9153 = !DILocation(line: 49, column: 1, scope: !9150)
-!9154 = !DILocation(line: 49, column: 1, scope: !9150)
-!9155 = !DILocation(line: 49, column: 1, scope: !9150)
-!9156 = !DILocation(line: 49, column: 1, scope: !9150)
-!9157 = distinct !DISubprogram(name: "setFG_cyan", scope: !0, file: !0, line: 52, type: !3, scopeLine: 52, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
-!9158 = !DILocation(line: 54, column: 1, scope: !9157)
-!9159 = !DILocation(line: 54, column: 1, scope: !9157)
-!9160 = !DILocation(line: 54, column: 1, scope: !9157)
-!9161 = !DILocation(line: 54, column: 1, scope: !9157)
-!9162 = !DILocation(line: 54, column: 1, scope: !9157)
-!9163 = !DILocation(line: 54, column: 1, scope: !9157)
-!9164 = distinct !DISubprogram(name: "setFG_white", scope: !0, file: !0, line: 57, type: !3, scopeLine: 57, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
-!9165 = !DILocation(line: 59, column: 1, scope: !9164)
-!9166 = !DILocation(line: 59, column: 1, scope: !9164)
-!9167 = !DILocation(line: 59, column: 1, scope: !9164)
-!9168 = !DILocation(line: 59, column: 1, scope: !9164)
-!9169 = !DILocation(line: 59, column: 1, scope: !9164)
-!9170 = !DILocation(line: 59, column: 1, scope: !9164)
-!9171 = distinct !DISubprogram(name: "setFG_b_black", scope: !0, file: !0, line: 62, type: !3, scopeLine: 62, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
-!9172 = !DILocation(line: 64, column: 1, scope: !9171)
-!9173 = !DILocation(line: 64, column: 1, scope: !9171)
-!9174 = !DILocation(line: 64, column: 1, scope: !9171)
-!9175 = !DILocation(line: 64, column: 1, scope: !9171)
-!9176 = !DILocation(line: 64, column: 1, scope: !9171)
-!9177 = !DILocation(line: 64, column: 1, scope: !9171)
-!9178 = distinct !DISubprogram(name: "setFG_b_red", scope: !0, file: !0, line: 67, type: !3, scopeLine: 67, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
-!9179 = !DILocation(line: 69, column: 1, scope: !9178)
-!9180 = !DILocation(line: 69, column: 1, scope: !9178)
-!9181 = !DILocation(line: 69, column: 1, scope: !9178)
-!9182 = !DILocation(line: 69, column: 1, scope: !9178)
-!9183 = !DILocation(line: 69, column: 1, scope: !9178)
-!9184 = !DILocation(line: 69, column: 1, scope: !9178)
-!9185 = distinct !DISubprogram(name: "setFG_p_green", scope: !0, file: !0, line: 72, type: !3, scopeLine: 72, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
-!9186 = !DILocation(line: 74, column: 1, scope: !9185)
-!9187 = !DILocation(line: 74, column: 1, scope: !9185)
-!9188 = !DILocation(line: 74, column: 1, scope: !9185)
-!9189 = !DILocation(line: 74, column: 1, scope: !9185)
-!9190 = !DILocation(line: 74, column: 1, scope: !9185)
-!9191 = !DILocation(line: 74, column: 1, scope: !9185)
-!9192 = distinct !DISubprogram(name: "setFG_b_yellow", scope: !0, file: !0, line: 77, type: !3, scopeLine: 77, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
-!9193 = !DILocation(line: 79, column: 1, scope: !9192)
-!9194 = !DILocation(line: 79, column: 1, scope: !9192)
-!9195 = !DILocation(line: 79, column: 1, scope: !9192)
-!9196 = !DILocation(line: 79, column: 1, scope: !9192)
-!9197 = !DILocation(line: 79, column: 1, scope: !9192)
-!9198 = !DILocation(line: 79, column: 1, scope: !9192)
-!9199 = distinct !DISubprogram(name: "setFG_b_blue", scope: !0, file: !0, line: 82, type: !3, scopeLine: 82, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
-!9200 = !DILocation(line: 84, column: 1, scope: !9199)
-!9201 = !DILocation(line: 84, column: 1, scope: !9199)
-!9202 = !DILocation(line: 84, column: 1, scope: !9199)
-!9203 = !DILocation(line: 84, column: 1, scope: !9199)
-!9204 = !DILocation(line: 84, column: 1, scope: !9199)
-!9205 = !DILocation(line: 84, column: 1, scope: !9199)
-!9206 = distinct !DISubprogram(name: "setFG_b_magenta", scope: !0, file: !0, line: 87, type: !3, scopeLine: 87, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
-!9207 = !DILocation(line: 89, column: 1, scope: !9206)
-!9208 = !DILocation(line: 89, column: 1, scope: !9206)
-!9209 = !DILocation(line: 89, column: 1, scope: !9206)
-!9210 = !DILocation(line: 89, column: 1, scope: !9206)
-!9211 = !DILocation(line: 89, column: 1, scope: !9206)
-!9212 = !DILocation(line: 89, column: 1, scope: !9206)
-!9213 = distinct !DISubprogram(name: "setFG_b_cyan", scope: !0, file: !0, line: 92, type: !3, scopeLine: 92, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
-!9214 = !DILocation(line: 94, column: 1, scope: !9213)
-!9215 = !DILocation(line: 94, column: 1, scope: !9213)
-!9216 = !DILocation(line: 94, column: 1, scope: !9213)
-!9217 = !DILocation(line: 94, column: 1, scope: !9213)
-!9218 = !DILocation(line: 94, column: 1, scope: !9213)
-!9219 = !DILocation(line: 94, column: 1, scope: !9213)
-!9220 = distinct !DISubprogram(name: "setFG_b_white", scope: !0, file: !0, line: 97, type: !3, scopeLine: 97, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
-!9221 = !DILocation(line: 99, column: 1, scope: !9220)
-!9222 = !DILocation(line: 99, column: 1, scope: !9220)
-!9223 = !DILocation(line: 99, column: 1, scope: !9220)
-!9224 = !DILocation(line: 99, column: 1, scope: !9220)
-!9225 = !DILocation(line: 99, column: 1, scope: !9220)
-!9226 = !DILocation(line: 99, column: 1, scope: !9220)
-!9227 = distinct !DISubprogram(name: "setBG_red", scope: !0, file: !0, line: 102, type: !3, scopeLine: 102, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
-!9228 = !DILocation(line: 104, column: 1, scope: !9227)
-!9229 = !DILocation(line: 104, column: 1, scope: !9227)
-!9230 = !DILocation(line: 104, column: 1, scope: !9227)
-!9231 = !DILocation(line: 104, column: 1, scope: !9227)
-!9232 = !DILocation(line: 104, column: 1, scope: !9227)
-!9233 = !DILocation(line: 104, column: 1, scope: !9227)
-!9234 = distinct !DISubprogram(name: "setBG_black", scope: !0, file: !0, line: 107, type: !3, scopeLine: 107, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
-!9235 = !DILocation(line: 109, column: 1, scope: !9234)
-!9236 = !DILocation(line: 109, column: 1, scope: !9234)
-!9237 = !DILocation(line: 109, column: 1, scope: !9234)
-!9238 = !DILocation(line: 109, column: 1, scope: !9234)
-!9239 = !DILocation(line: 109, column: 1, scope: !9234)
-!9240 = !DILocation(line: 109, column: 1, scope: !9234)
-!9241 = distinct !DISubprogram(name: "setBG_green", scope: !0, file: !0, line: 112, type: !3, scopeLine: 112, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
-!9242 = !DILocation(line: 114, column: 1, scope: !9241)
-!9243 = !DILocation(line: 114, column: 1, scope: !9241)
-!9244 = !DILocation(line: 114, column: 1, scope: !9241)
-!9245 = !DILocation(line: 114, column: 1, scope: !9241)
-!9246 = !DILocation(line: 114, column: 1, scope: !9241)
-!9247 = !DILocation(line: 114, column: 1, scope: !9241)
-!9248 = distinct !DISubprogram(name: "setBG_yellow", scope: !0, file: !0, line: 117, type: !3, scopeLine: 117, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
-!9249 = !DILocation(line: 119, column: 1, scope: !9248)
-!9250 = !DILocation(line: 119, column: 1, scope: !9248)
-!9251 = !DILocation(line: 119, column: 1, scope: !9248)
-!9252 = !DILocation(line: 119, column: 1, scope: !9248)
-!9253 = !DILocation(line: 119, column: 1, scope: !9248)
-!9254 = !DILocation(line: 119, column: 1, scope: !9248)
-!9255 = distinct !DISubprogram(name: "setBG_blue", scope: !0, file: !0, line: 122, type: !3, scopeLine: 122, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
-!9256 = !DILocation(line: 124, column: 1, scope: !9255)
-!9257 = !DILocation(line: 124, column: 1, scope: !9255)
-!9258 = !DILocation(line: 124, column: 1, scope: !9255)
-!9259 = !DILocation(line: 124, column: 1, scope: !9255)
-!9260 = !DILocation(line: 124, column: 1, scope: !9255)
-!9261 = !DILocation(line: 124, column: 1, scope: !9255)
-!9262 = distinct !DISubprogram(name: "setBG_magenta", scope: !0, file: !0, line: 127, type: !3, scopeLine: 127, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
-!9263 = !DILocation(line: 129, column: 1, scope: !9262)
-!9264 = !DILocation(line: 129, column: 1, scope: !9262)
-!9265 = !DILocation(line: 129, column: 1, scope: !9262)
-!9266 = !DILocation(line: 129, column: 1, scope: !9262)
-!9267 = !DILocation(line: 129, column: 1, scope: !9262)
-!9268 = !DILocation(line: 129, column: 1, scope: !9262)
-!9269 = distinct !DISubprogram(name: "setBG_cyan", scope: !0, file: !0, line: 132, type: !3, scopeLine: 132, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
-!9270 = !DILocation(line: 134, column: 1, scope: !9269)
-!9271 = !DILocation(line: 134, column: 1, scope: !9269)
-!9272 = !DILocation(line: 134, column: 1, scope: !9269)
-!9273 = !DILocation(line: 134, column: 1, scope: !9269)
-!9274 = !DILocation(line: 134, column: 1, scope: !9269)
-!9275 = !DILocation(line: 134, column: 1, scope: !9269)
-!9276 = distinct !DISubprogram(name: "setBG_white", scope: !0, file: !0, line: 137, type: !3, scopeLine: 137, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
-!9277 = !DILocation(line: 139, column: 1, scope: !9276)
-!9278 = !DILocation(line: 139, column: 1, scope: !9276)
-!9279 = !DILocation(line: 139, column: 1, scope: !9276)
-!9280 = !DILocation(line: 139, column: 1, scope: !9276)
-!9281 = !DILocation(line: 139, column: 1, scope: !9276)
-!9282 = !DILocation(line: 139, column: 1, scope: !9276)
-!9283 = distinct !DISubprogram(name: "setBG_b_black", scope: !0, file: !0, line: 142, type: !3, scopeLine: 142, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
-!9284 = !DILocation(line: 144, column: 1, scope: !9283)
-!9285 = !DILocation(line: 144, column: 1, scope: !9283)
-!9286 = !DILocation(line: 144, column: 1, scope: !9283)
-!9287 = !DILocation(line: 144, column: 1, scope: !9283)
-!9288 = !DILocation(line: 144, column: 1, scope: !9283)
-!9289 = !DILocation(line: 144, column: 1, scope: !9283)
-!9290 = distinct !DISubprogram(name: "setBG_b_red", scope: !0, file: !0, line: 147, type: !3, scopeLine: 147, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
-!9291 = !DILocation(line: 149, column: 1, scope: !9290)
-!9292 = !DILocation(line: 149, column: 1, scope: !9290)
-!9293 = !DILocation(line: 149, column: 1, scope: !9290)
-!9294 = !DILocation(line: 149, column: 1, scope: !9290)
-!9295 = !DILocation(line: 149, column: 1, scope: !9290)
-!9296 = !DILocation(line: 149, column: 1, scope: !9290)
-!9297 = distinct !DISubprogram(name: "setBG_b_green", scope: !0, file: !0, line: 152, type: !3, scopeLine: 152, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
-!9298 = !DILocation(line: 154, column: 1, scope: !9297)
-!9299 = !DILocation(line: 154, column: 1, scope: !9297)
-!9300 = !DILocation(line: 154, column: 1, scope: !9297)
-!9301 = !DILocation(line: 154, column: 1, scope: !9297)
-!9302 = !DILocation(line: 154, column: 1, scope: !9297)
-!9303 = !DILocation(line: 154, column: 1, scope: !9297)
-!9304 = distinct !DISubprogram(name: "setBG_b_yellow", scope: !0, file: !0, line: 157, type: !3, scopeLine: 157, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
-!9305 = !DILocation(line: 159, column: 1, scope: !9304)
-!9306 = !DILocation(line: 159, column: 1, scope: !9304)
-!9307 = !DILocation(line: 159, column: 1, scope: !9304)
-!9308 = !DILocation(line: 159, column: 1, scope: !9304)
-!9309 = !DILocation(line: 159, column: 1, scope: !9304)
-!9310 = !DILocation(line: 159, column: 1, scope: !9304)
-!9311 = distinct !DISubprogram(name: "setBG_b_blue", scope: !0, file: !0, line: 162, type: !3, scopeLine: 162, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
-!9312 = !DILocation(line: 164, column: 1, scope: !9311)
-!9313 = !DILocation(line: 164, column: 1, scope: !9311)
-!9314 = !DILocation(line: 164, column: 1, scope: !9311)
-!9315 = !DILocation(line: 164, column: 1, scope: !9311)
-!9316 = !DILocation(line: 164, column: 1, scope: !9311)
-!9317 = !DILocation(line: 164, column: 1, scope: !9311)
-!9318 = distinct !DISubprogram(name: "setBG_b_magenta", scope: !0, file: !0, line: 167, type: !3, scopeLine: 167, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
-!9319 = !DILocation(line: 169, column: 1, scope: !9318)
-!9320 = !DILocation(line: 169, column: 1, scope: !9318)
-!9321 = !DILocation(line: 169, column: 1, scope: !9318)
-!9322 = !DILocation(line: 169, column: 1, scope: !9318)
-!9323 = !DILocation(line: 169, column: 1, scope: !9318)
-!9324 = !DILocation(line: 169, column: 1, scope: !9318)
-!9325 = distinct !DISubprogram(name: "setBG_b_cyan", scope: !0, file: !0, line: 172, type: !3, scopeLine: 172, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
-!9326 = !DILocation(line: 174, column: 1, scope: !9325)
-!9327 = !DILocation(line: 174, column: 1, scope: !9325)
-!9328 = !DILocation(line: 174, column: 1, scope: !9325)
-!9329 = !DILocation(line: 174, column: 1, scope: !9325)
-!9330 = !DILocation(line: 174, column: 1, scope: !9325)
-!9331 = !DILocation(line: 174, column: 1, scope: !9325)
-!9332 = distinct !DISubprogram(name: "setBG_b_white", scope: !0, file: !0, line: 177, type: !3, scopeLine: 177, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
-!9333 = !DILocation(line: 179, column: 1, scope: !9332)
-!9334 = !DILocation(line: 179, column: 1, scope: !9332)
-!9335 = !DILocation(line: 179, column: 1, scope: !9332)
-!9336 = !DILocation(line: 179, column: 1, scope: !9332)
-!9337 = !DILocation(line: 179, column: 1, scope: !9332)
-!9338 = !DILocation(line: 179, column: 1, scope: !9332)
-!9339 = distinct !DISubprogram(name: "__freak_generated_top_level", scope: !0, file: !0, line: 1, type: !3, scopeLine: 1, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
-!9340 = !DILocation(line: 21, column: 1, scope: !9339)
-!9341 = !DILocation(line: 22, column: 1, scope: !9339)
-!9342 = !DILocation(line: 23, column: 1, scope: !9339)
-!9343 = !DILocation(line: 24, column: 1, scope: !9339)
-!9344 = !DILocation(line: 25, column: 1, scope: !9339)
-!9345 = !DILocation(line: 26, column: 1, scope: !9339)
-!9346 = !DILocation(line: 29, column: 1, scope: !9339)
-!9347 = !DILocation(line: 29, column: 1, scope: !9339)
-!9348 = !DILocation(line: 29, column: 1, scope: !9339)
-!9349 = !DILocation(line: 30, column: 1, scope: !9339)
-!9350 = !DILocation(line: 31, column: 1, scope: !9339)
-!9351 = !DILocation(line: 15, column: 1, scope: !9339)
-!9352 = !DILocation(line: 16, column: 1, scope: !9339)
-!9353 = !DILocation(line: 17, column: 1, scope: !9339)
-!9354 = !DILocation(line: 18, column: 1, scope: !9339)
-!9355 = !DILocation(line: 19, column: 1, scope: !9339)
-!9356 = !DILocation(line: 3, column: 1, scope: !9339)
-!9357 = !DILocation(line: 3, column: 1, scope: !9339)
-!9358 = !DILocation(line: 3, column: 1, scope: !9339)
-!9359 = !DILocation(line: 4, column: 1, scope: !9339)
-!9360 = !DILocation(line: 4, column: 1, scope: !9339)
-!9361 = !DILocation(line: 4, column: 1, scope: !9339)
-!9362 = !DILocation(line: 4, column: 1, scope: !9339)
-!9363 = distinct !DISubprogram(name: "main", scope: !0, file: !0, line: 1, type: !3, scopeLine: 1, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
-!9364 = !DILocation(line: 1, column: 1, scope: !9363)
-!9365 = !DILocation(line: 1, column: 1, scope: !9363)
-!9366 = !DILocation(line: 1, column: 1, scope: !9363)
-!9367 = !DILocation(line: 1, column: 1, scope: !9363)
-!9368 = !DILocation(line: 1, column: 1, scope: !9363)
-!9369 = !DILocation(line: 1, column: 1, scope: !9363)
-!9370 = !DILocation(line: 1, column: 1, scope: !9363)
-!9371 = !DILocation(line: 1, column: 1, scope: !9363)
-!9372 = !DILocation(line: 1, column: 1, scope: !9363)
-!9373 = !DILocation(line: 1, column: 1, scope: !9363)
-!9374 = !DILocation(line: 1, column: 1, scope: !9363)
-!9375 = !DILocation(line: 1, column: 1, scope: !9363)
-!9376 = !DILocation(line: 1, column: 1, scope: !9363)
-!9377 = !DILocation(line: 1, column: 1, scope: !9363)
-!9378 = !{i32 7, !"Dwarf Version", i32 4}
-!9379 = !{i32 2, !"Debug Info Version", i32 3}
+!9103 = distinct !DISubprogram(name: "askC", scope: !0, file: !0, line: 12, type: !3, scopeLine: 12, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
+!9104 = !DILocation(line: 12, column: 1, scope: !9103)
+!9105 = !DILocation(line: 12, column: 1, scope: !9103)
+!9106 = !DILocation(line: 14, column: 1, scope: !9103)
+!9107 = !DILocation(line: 14, column: 1, scope: !9103)
+!9108 = !DILocation(line: 14, column: 1, scope: !9103)
+!9109 = !DILocation(line: 14, column: 1, scope: !9103)
+!9110 = !DILocation(line: 14, column: 1, scope: !9103)
+!9111 = !DILocation(line: 14, column: 1, scope: !9103)
+!9112 = !DILocation(line: 14, column: 1, scope: !9103)
+!9113 = !DILocation(line: 14, column: 1, scope: !9103)
+!9114 = !DILocation(line: 14, column: 1, scope: !9103)
+!9115 = !DILocation(line: 14, column: 1, scope: !9103)
+!9116 = !DILocation(line: 14, column: 1, scope: !9103)
+!9117 = !DILocation(line: 14, column: 1, scope: !9103)
+!9118 = !DILocation(line: 14, column: 1, scope: !9103)
+!9119 = !DILocation(line: 14, column: 1, scope: !9103)
+!9120 = !DILocation(line: 14, column: 1, scope: !9103)
+!9121 = !DILocation(line: 14, column: 1, scope: !9103)
+!9122 = !DILocation(line: 14, column: 1, scope: !9103)
+!9123 = !DILocation(line: 14, column: 1, scope: !9103)
+!9124 = !DILocation(line: 14, column: 1, scope: !9103)
+!9125 = !DILocation(line: 14, column: 1, scope: !9103)
+!9126 = !DILocation(line: 14, column: 1, scope: !9103)
+!9127 = distinct !DISubprogram(name: "resetColors", scope: !0, file: !0, line: 23, type: !3, scopeLine: 23, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
+!9128 = !DILocation(line: 25, column: 1, scope: !9127)
+!9129 = !DILocation(line: 25, column: 1, scope: !9127)
+!9130 = !DILocation(line: 25, column: 1, scope: !9127)
+!9131 = !DILocation(line: 25, column: 1, scope: !9127)
+!9132 = !DILocation(line: 25, column: 1, scope: !9127)
+!9133 = !DILocation(line: 26, column: 1, scope: !9127)
+!9134 = !DILocation(line: 26, column: 1, scope: !9127)
+!9135 = !DILocation(line: 26, column: 1, scope: !9127)
+!9136 = !DILocation(line: 26, column: 1, scope: !9127)
+!9137 = !DILocation(line: 26, column: 1, scope: !9127)
+!9138 = !DILocation(line: 26, column: 1, scope: !9127)
+!9139 = distinct !DISubprogram(name: "setFG_red", scope: !0, file: !0, line: 30, type: !3, scopeLine: 30, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
+!9140 = !DILocation(line: 32, column: 1, scope: !9139)
+!9141 = !DILocation(line: 32, column: 1, scope: !9139)
+!9142 = !DILocation(line: 32, column: 1, scope: !9139)
+!9143 = !DILocation(line: 32, column: 1, scope: !9139)
+!9144 = !DILocation(line: 32, column: 1, scope: !9139)
+!9145 = !DILocation(line: 32, column: 1, scope: !9139)
+!9146 = distinct !DISubprogram(name: "setFG_black", scope: !0, file: !0, line: 35, type: !3, scopeLine: 35, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
+!9147 = !DILocation(line: 37, column: 1, scope: !9146)
+!9148 = !DILocation(line: 37, column: 1, scope: !9146)
+!9149 = !DILocation(line: 37, column: 1, scope: !9146)
+!9150 = !DILocation(line: 37, column: 1, scope: !9146)
+!9151 = !DILocation(line: 37, column: 1, scope: !9146)
+!9152 = !DILocation(line: 37, column: 1, scope: !9146)
+!9153 = distinct !DISubprogram(name: "setFG_green", scope: !0, file: !0, line: 40, type: !3, scopeLine: 40, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
+!9154 = !DILocation(line: 42, column: 1, scope: !9153)
+!9155 = !DILocation(line: 42, column: 1, scope: !9153)
+!9156 = !DILocation(line: 42, column: 1, scope: !9153)
+!9157 = !DILocation(line: 42, column: 1, scope: !9153)
+!9158 = !DILocation(line: 42, column: 1, scope: !9153)
+!9159 = !DILocation(line: 42, column: 1, scope: !9153)
+!9160 = distinct !DISubprogram(name: "setFG_yellow", scope: !0, file: !0, line: 45, type: !3, scopeLine: 45, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
+!9161 = !DILocation(line: 47, column: 1, scope: !9160)
+!9162 = !DILocation(line: 47, column: 1, scope: !9160)
+!9163 = !DILocation(line: 47, column: 1, scope: !9160)
+!9164 = !DILocation(line: 47, column: 1, scope: !9160)
+!9165 = !DILocation(line: 47, column: 1, scope: !9160)
+!9166 = !DILocation(line: 47, column: 1, scope: !9160)
+!9167 = distinct !DISubprogram(name: "setFG_blue", scope: !0, file: !0, line: 50, type: !3, scopeLine: 50, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
+!9168 = !DILocation(line: 52, column: 1, scope: !9167)
+!9169 = !DILocation(line: 52, column: 1, scope: !9167)
+!9170 = !DILocation(line: 52, column: 1, scope: !9167)
+!9171 = !DILocation(line: 52, column: 1, scope: !9167)
+!9172 = !DILocation(line: 52, column: 1, scope: !9167)
+!9173 = !DILocation(line: 52, column: 1, scope: !9167)
+!9174 = distinct !DISubprogram(name: "setFG_magenta", scope: !0, file: !0, line: 55, type: !3, scopeLine: 55, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
+!9175 = !DILocation(line: 57, column: 1, scope: !9174)
+!9176 = !DILocation(line: 57, column: 1, scope: !9174)
+!9177 = !DILocation(line: 57, column: 1, scope: !9174)
+!9178 = !DILocation(line: 57, column: 1, scope: !9174)
+!9179 = !DILocation(line: 57, column: 1, scope: !9174)
+!9180 = !DILocation(line: 57, column: 1, scope: !9174)
+!9181 = distinct !DISubprogram(name: "setFG_cyan", scope: !0, file: !0, line: 60, type: !3, scopeLine: 60, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
+!9182 = !DILocation(line: 62, column: 1, scope: !9181)
+!9183 = !DILocation(line: 62, column: 1, scope: !9181)
+!9184 = !DILocation(line: 62, column: 1, scope: !9181)
+!9185 = !DILocation(line: 62, column: 1, scope: !9181)
+!9186 = !DILocation(line: 62, column: 1, scope: !9181)
+!9187 = !DILocation(line: 62, column: 1, scope: !9181)
+!9188 = distinct !DISubprogram(name: "setFG_white", scope: !0, file: !0, line: 65, type: !3, scopeLine: 65, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
+!9189 = !DILocation(line: 67, column: 1, scope: !9188)
+!9190 = !DILocation(line: 67, column: 1, scope: !9188)
+!9191 = !DILocation(line: 67, column: 1, scope: !9188)
+!9192 = !DILocation(line: 67, column: 1, scope: !9188)
+!9193 = !DILocation(line: 67, column: 1, scope: !9188)
+!9194 = !DILocation(line: 67, column: 1, scope: !9188)
+!9195 = distinct !DISubprogram(name: "setFG_b_black", scope: !0, file: !0, line: 70, type: !3, scopeLine: 70, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
+!9196 = !DILocation(line: 72, column: 1, scope: !9195)
+!9197 = !DILocation(line: 72, column: 1, scope: !9195)
+!9198 = !DILocation(line: 72, column: 1, scope: !9195)
+!9199 = !DILocation(line: 72, column: 1, scope: !9195)
+!9200 = !DILocation(line: 72, column: 1, scope: !9195)
+!9201 = !DILocation(line: 72, column: 1, scope: !9195)
+!9202 = distinct !DISubprogram(name: "setFG_b_red", scope: !0, file: !0, line: 75, type: !3, scopeLine: 75, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
+!9203 = !DILocation(line: 77, column: 1, scope: !9202)
+!9204 = !DILocation(line: 77, column: 1, scope: !9202)
+!9205 = !DILocation(line: 77, column: 1, scope: !9202)
+!9206 = !DILocation(line: 77, column: 1, scope: !9202)
+!9207 = !DILocation(line: 77, column: 1, scope: !9202)
+!9208 = !DILocation(line: 77, column: 1, scope: !9202)
+!9209 = distinct !DISubprogram(name: "setFG_p_green", scope: !0, file: !0, line: 80, type: !3, scopeLine: 80, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
+!9210 = !DILocation(line: 82, column: 1, scope: !9209)
+!9211 = !DILocation(line: 82, column: 1, scope: !9209)
+!9212 = !DILocation(line: 82, column: 1, scope: !9209)
+!9213 = !DILocation(line: 82, column: 1, scope: !9209)
+!9214 = !DILocation(line: 82, column: 1, scope: !9209)
+!9215 = !DILocation(line: 82, column: 1, scope: !9209)
+!9216 = distinct !DISubprogram(name: "setFG_b_yellow", scope: !0, file: !0, line: 85, type: !3, scopeLine: 85, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
+!9217 = !DILocation(line: 87, column: 1, scope: !9216)
+!9218 = !DILocation(line: 87, column: 1, scope: !9216)
+!9219 = !DILocation(line: 87, column: 1, scope: !9216)
+!9220 = !DILocation(line: 87, column: 1, scope: !9216)
+!9221 = !DILocation(line: 87, column: 1, scope: !9216)
+!9222 = !DILocation(line: 87, column: 1, scope: !9216)
+!9223 = distinct !DISubprogram(name: "setFG_b_blue", scope: !0, file: !0, line: 90, type: !3, scopeLine: 90, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
+!9224 = !DILocation(line: 92, column: 1, scope: !9223)
+!9225 = !DILocation(line: 92, column: 1, scope: !9223)
+!9226 = !DILocation(line: 92, column: 1, scope: !9223)
+!9227 = !DILocation(line: 92, column: 1, scope: !9223)
+!9228 = !DILocation(line: 92, column: 1, scope: !9223)
+!9229 = !DILocation(line: 92, column: 1, scope: !9223)
+!9230 = distinct !DISubprogram(name: "setFG_b_magenta", scope: !0, file: !0, line: 95, type: !3, scopeLine: 95, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
+!9231 = !DILocation(line: 97, column: 1, scope: !9230)
+!9232 = !DILocation(line: 97, column: 1, scope: !9230)
+!9233 = !DILocation(line: 97, column: 1, scope: !9230)
+!9234 = !DILocation(line: 97, column: 1, scope: !9230)
+!9235 = !DILocation(line: 97, column: 1, scope: !9230)
+!9236 = !DILocation(line: 97, column: 1, scope: !9230)
+!9237 = distinct !DISubprogram(name: "setFG_b_cyan", scope: !0, file: !0, line: 100, type: !3, scopeLine: 100, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
+!9238 = !DILocation(line: 102, column: 1, scope: !9237)
+!9239 = !DILocation(line: 102, column: 1, scope: !9237)
+!9240 = !DILocation(line: 102, column: 1, scope: !9237)
+!9241 = !DILocation(line: 102, column: 1, scope: !9237)
+!9242 = !DILocation(line: 102, column: 1, scope: !9237)
+!9243 = !DILocation(line: 102, column: 1, scope: !9237)
+!9244 = distinct !DISubprogram(name: "setFG_b_white", scope: !0, file: !0, line: 105, type: !3, scopeLine: 105, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
+!9245 = !DILocation(line: 107, column: 1, scope: !9244)
+!9246 = !DILocation(line: 107, column: 1, scope: !9244)
+!9247 = !DILocation(line: 107, column: 1, scope: !9244)
+!9248 = !DILocation(line: 107, column: 1, scope: !9244)
+!9249 = !DILocation(line: 107, column: 1, scope: !9244)
+!9250 = !DILocation(line: 107, column: 1, scope: !9244)
+!9251 = distinct !DISubprogram(name: "setBG_red", scope: !0, file: !0, line: 110, type: !3, scopeLine: 110, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
+!9252 = !DILocation(line: 112, column: 1, scope: !9251)
+!9253 = !DILocation(line: 112, column: 1, scope: !9251)
+!9254 = !DILocation(line: 112, column: 1, scope: !9251)
+!9255 = !DILocation(line: 112, column: 1, scope: !9251)
+!9256 = !DILocation(line: 112, column: 1, scope: !9251)
+!9257 = !DILocation(line: 112, column: 1, scope: !9251)
+!9258 = distinct !DISubprogram(name: "setBG_black", scope: !0, file: !0, line: 115, type: !3, scopeLine: 115, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
+!9259 = !DILocation(line: 117, column: 1, scope: !9258)
+!9260 = !DILocation(line: 117, column: 1, scope: !9258)
+!9261 = !DILocation(line: 117, column: 1, scope: !9258)
+!9262 = !DILocation(line: 117, column: 1, scope: !9258)
+!9263 = !DILocation(line: 117, column: 1, scope: !9258)
+!9264 = !DILocation(line: 117, column: 1, scope: !9258)
+!9265 = distinct !DISubprogram(name: "setBG_green", scope: !0, file: !0, line: 120, type: !3, scopeLine: 120, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
+!9266 = !DILocation(line: 122, column: 1, scope: !9265)
+!9267 = !DILocation(line: 122, column: 1, scope: !9265)
+!9268 = !DILocation(line: 122, column: 1, scope: !9265)
+!9269 = !DILocation(line: 122, column: 1, scope: !9265)
+!9270 = !DILocation(line: 122, column: 1, scope: !9265)
+!9271 = !DILocation(line: 122, column: 1, scope: !9265)
+!9272 = distinct !DISubprogram(name: "setBG_yellow", scope: !0, file: !0, line: 125, type: !3, scopeLine: 125, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
+!9273 = !DILocation(line: 127, column: 1, scope: !9272)
+!9274 = !DILocation(line: 127, column: 1, scope: !9272)
+!9275 = !DILocation(line: 127, column: 1, scope: !9272)
+!9276 = !DILocation(line: 127, column: 1, scope: !9272)
+!9277 = !DILocation(line: 127, column: 1, scope: !9272)
+!9278 = !DILocation(line: 127, column: 1, scope: !9272)
+!9279 = distinct !DISubprogram(name: "setBG_blue", scope: !0, file: !0, line: 130, type: !3, scopeLine: 130, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
+!9280 = !DILocation(line: 132, column: 1, scope: !9279)
+!9281 = !DILocation(line: 132, column: 1, scope: !9279)
+!9282 = !DILocation(line: 132, column: 1, scope: !9279)
+!9283 = !DILocation(line: 132, column: 1, scope: !9279)
+!9284 = !DILocation(line: 132, column: 1, scope: !9279)
+!9285 = !DILocation(line: 132, column: 1, scope: !9279)
+!9286 = distinct !DISubprogram(name: "setBG_magenta", scope: !0, file: !0, line: 135, type: !3, scopeLine: 135, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
+!9287 = !DILocation(line: 137, column: 1, scope: !9286)
+!9288 = !DILocation(line: 137, column: 1, scope: !9286)
+!9289 = !DILocation(line: 137, column: 1, scope: !9286)
+!9290 = !DILocation(line: 137, column: 1, scope: !9286)
+!9291 = !DILocation(line: 137, column: 1, scope: !9286)
+!9292 = !DILocation(line: 137, column: 1, scope: !9286)
+!9293 = distinct !DISubprogram(name: "setBG_cyan", scope: !0, file: !0, line: 140, type: !3, scopeLine: 140, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
+!9294 = !DILocation(line: 142, column: 1, scope: !9293)
+!9295 = !DILocation(line: 142, column: 1, scope: !9293)
+!9296 = !DILocation(line: 142, column: 1, scope: !9293)
+!9297 = !DILocation(line: 142, column: 1, scope: !9293)
+!9298 = !DILocation(line: 142, column: 1, scope: !9293)
+!9299 = !DILocation(line: 142, column: 1, scope: !9293)
+!9300 = distinct !DISubprogram(name: "setBG_white", scope: !0, file: !0, line: 145, type: !3, scopeLine: 145, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
+!9301 = !DILocation(line: 147, column: 1, scope: !9300)
+!9302 = !DILocation(line: 147, column: 1, scope: !9300)
+!9303 = !DILocation(line: 147, column: 1, scope: !9300)
+!9304 = !DILocation(line: 147, column: 1, scope: !9300)
+!9305 = !DILocation(line: 147, column: 1, scope: !9300)
+!9306 = !DILocation(line: 147, column: 1, scope: !9300)
+!9307 = distinct !DISubprogram(name: "setBG_b_black", scope: !0, file: !0, line: 150, type: !3, scopeLine: 150, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
+!9308 = !DILocation(line: 152, column: 1, scope: !9307)
+!9309 = !DILocation(line: 152, column: 1, scope: !9307)
+!9310 = !DILocation(line: 152, column: 1, scope: !9307)
+!9311 = !DILocation(line: 152, column: 1, scope: !9307)
+!9312 = !DILocation(line: 152, column: 1, scope: !9307)
+!9313 = !DILocation(line: 152, column: 1, scope: !9307)
+!9314 = distinct !DISubprogram(name: "setBG_b_red", scope: !0, file: !0, line: 155, type: !3, scopeLine: 155, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
+!9315 = !DILocation(line: 157, column: 1, scope: !9314)
+!9316 = !DILocation(line: 157, column: 1, scope: !9314)
+!9317 = !DILocation(line: 157, column: 1, scope: !9314)
+!9318 = !DILocation(line: 157, column: 1, scope: !9314)
+!9319 = !DILocation(line: 157, column: 1, scope: !9314)
+!9320 = !DILocation(line: 157, column: 1, scope: !9314)
+!9321 = distinct !DISubprogram(name: "setBG_b_green", scope: !0, file: !0, line: 160, type: !3, scopeLine: 160, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
+!9322 = !DILocation(line: 162, column: 1, scope: !9321)
+!9323 = !DILocation(line: 162, column: 1, scope: !9321)
+!9324 = !DILocation(line: 162, column: 1, scope: !9321)
+!9325 = !DILocation(line: 162, column: 1, scope: !9321)
+!9326 = !DILocation(line: 162, column: 1, scope: !9321)
+!9327 = !DILocation(line: 162, column: 1, scope: !9321)
+!9328 = distinct !DISubprogram(name: "setBG_b_yellow", scope: !0, file: !0, line: 165, type: !3, scopeLine: 165, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
+!9329 = !DILocation(line: 167, column: 1, scope: !9328)
+!9330 = !DILocation(line: 167, column: 1, scope: !9328)
+!9331 = !DILocation(line: 167, column: 1, scope: !9328)
+!9332 = !DILocation(line: 167, column: 1, scope: !9328)
+!9333 = !DILocation(line: 167, column: 1, scope: !9328)
+!9334 = !DILocation(line: 167, column: 1, scope: !9328)
+!9335 = distinct !DISubprogram(name: "setBG_b_blue", scope: !0, file: !0, line: 170, type: !3, scopeLine: 170, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
+!9336 = !DILocation(line: 172, column: 1, scope: !9335)
+!9337 = !DILocation(line: 172, column: 1, scope: !9335)
+!9338 = !DILocation(line: 172, column: 1, scope: !9335)
+!9339 = !DILocation(line: 172, column: 1, scope: !9335)
+!9340 = !DILocation(line: 172, column: 1, scope: !9335)
+!9341 = !DILocation(line: 172, column: 1, scope: !9335)
+!9342 = distinct !DISubprogram(name: "setBG_b_magenta", scope: !0, file: !0, line: 175, type: !3, scopeLine: 175, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
+!9343 = !DILocation(line: 177, column: 1, scope: !9342)
+!9344 = !DILocation(line: 177, column: 1, scope: !9342)
+!9345 = !DILocation(line: 177, column: 1, scope: !9342)
+!9346 = !DILocation(line: 177, column: 1, scope: !9342)
+!9347 = !DILocation(line: 177, column: 1, scope: !9342)
+!9348 = !DILocation(line: 177, column: 1, scope: !9342)
+!9349 = distinct !DISubprogram(name: "setBG_b_cyan", scope: !0, file: !0, line: 180, type: !3, scopeLine: 180, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
+!9350 = !DILocation(line: 182, column: 1, scope: !9349)
+!9351 = !DILocation(line: 182, column: 1, scope: !9349)
+!9352 = !DILocation(line: 182, column: 1, scope: !9349)
+!9353 = !DILocation(line: 182, column: 1, scope: !9349)
+!9354 = !DILocation(line: 182, column: 1, scope: !9349)
+!9355 = !DILocation(line: 182, column: 1, scope: !9349)
+!9356 = distinct !DISubprogram(name: "setBG_b_white", scope: !0, file: !0, line: 185, type: !3, scopeLine: 185, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
+!9357 = !DILocation(line: 187, column: 1, scope: !9356)
+!9358 = !DILocation(line: 187, column: 1, scope: !9356)
+!9359 = !DILocation(line: 187, column: 1, scope: !9356)
+!9360 = !DILocation(line: 187, column: 1, scope: !9356)
+!9361 = !DILocation(line: 187, column: 1, scope: !9356)
+!9362 = !DILocation(line: 187, column: 1, scope: !9356)
+!9363 = distinct !DISubprogram(name: "__freak_generated_top_level", scope: !0, file: !0, line: 1, type: !3, scopeLine: 1, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
+!9364 = !DILocation(line: 21, column: 1, scope: !9363)
+!9365 = !DILocation(line: 22, column: 1, scope: !9363)
+!9366 = !DILocation(line: 23, column: 1, scope: !9363)
+!9367 = !DILocation(line: 24, column: 1, scope: !9363)
+!9368 = !DILocation(line: 25, column: 1, scope: !9363)
+!9369 = !DILocation(line: 26, column: 1, scope: !9363)
+!9370 = !DILocation(line: 29, column: 1, scope: !9363)
+!9371 = !DILocation(line: 29, column: 1, scope: !9363)
+!9372 = !DILocation(line: 29, column: 1, scope: !9363)
+!9373 = !DILocation(line: 30, column: 1, scope: !9363)
+!9374 = !DILocation(line: 31, column: 1, scope: !9363)
+!9375 = !DILocation(line: 15, column: 1, scope: !9363)
+!9376 = !DILocation(line: 16, column: 1, scope: !9363)
+!9377 = !DILocation(line: 17, column: 1, scope: !9363)
+!9378 = !DILocation(line: 18, column: 1, scope: !9363)
+!9379 = !DILocation(line: 19, column: 1, scope: !9363)
+!9380 = !DILocation(line: 3, column: 1, scope: !9363)
+!9381 = !DILocation(line: 3, column: 1, scope: !9363)
+!9382 = !DILocation(line: 3, column: 1, scope: !9363)
+!9383 = !DILocation(line: 4, column: 1, scope: !9363)
+!9384 = !DILocation(line: 4, column: 1, scope: !9363)
+!9385 = !DILocation(line: 4, column: 1, scope: !9363)
+!9386 = !DILocation(line: 17, column: 1, scope: !9363)
+!9387 = !DILocation(line: 18, column: 1, scope: !9363)
+!9388 = !DILocation(line: 19, column: 1, scope: !9363)
+!9389 = !DILocation(line: 19, column: 1, scope: !9363)
+!9390 = !DILocation(line: 19, column: 1, scope: !9363)
+!9391 = !DILocation(line: 19, column: 1, scope: !9363)
+!9392 = !DILocation(line: 20, column: 1, scope: !9363)
+!9393 = !DILocation(line: 20, column: 1, scope: !9363)
+!9394 = !DILocation(line: 20, column: 1, scope: !9363)
+!9395 = !DILocation(line: 20, column: 1, scope: !9363)
+!9396 = distinct !DISubprogram(name: "main", scope: !0, file: !0, line: 1, type: !3, scopeLine: 1, spFlags: DISPFlagDefinition, unit: !1, retainedNodes: !2)
+!9397 = !DILocation(line: 1, column: 1, scope: !9396)
+!9398 = !DILocation(line: 1, column: 1, scope: !9396)
+!9399 = !DILocation(line: 1, column: 1, scope: !9396)
+!9400 = !DILocation(line: 1, column: 1, scope: !9396)
+!9401 = !DILocation(line: 1, column: 1, scope: !9396)
+!9402 = !DILocation(line: 1, column: 1, scope: !9396)
+!9403 = !DILocation(line: 1, column: 1, scope: !9396)
+!9404 = !DILocation(line: 1, column: 1, scope: !9396)
+!9405 = !DILocation(line: 1, column: 1, scope: !9396)
+!9406 = !DILocation(line: 1, column: 1, scope: !9396)
+!9407 = !DILocation(line: 1, column: 1, scope: !9396)
+!9408 = !DILocation(line: 1, column: 1, scope: !9396)
+!9409 = !DILocation(line: 1, column: 1, scope: !9396)
+!9410 = !DILocation(line: 1, column: 1, scope: !9396)
+!9411 = !DILocation(line: 1, column: 1, scope: !9396)
+!9412 = !DILocation(line: 1, column: 1, scope: !9396)
+!9413 = !DILocation(line: 1, column: 1, scope: !9396)
+!9414 = !{i32 7, !"Dwarf Version", i32 4}
+!9415 = !{i32 2, !"Debug Info Version", i32 3}
 
