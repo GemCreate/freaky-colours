@@ -3,7 +3,7 @@ name = "freaky-colours"
 version = "1.0.0"
 kind = "lib"
 author = "Akumarin Kukino / FREAK Core Team"
-edition = "3"
+edition = "Freak General"
 description = "Console colour library."
 readme = "README.md"
 
