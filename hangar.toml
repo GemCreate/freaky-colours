@@ -7,4 +7,5 @@ edition = "3"
 description = "Console colour library."
 readme = "README.md"
 
-
+[modules]
+core = "src/main.fk"
