@@ -4,7 +4,6 @@ version = "1.0.0"
 kind = "lib"
 author = "Akumarin Kukino / FREAK Core Team"
 edition = "Freak General"
-description = "Console colour library."
 readme = "README.md"
 
 [modules]
